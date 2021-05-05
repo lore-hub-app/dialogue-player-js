@@ -1,0 +1,10 @@
+{
+  "name": "vue-2-js-example",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Andrei Kniazev <worldpwn@hotmail.com>",
+  "license": "Apache License 2.0"
+}
