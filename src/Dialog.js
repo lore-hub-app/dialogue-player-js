@@ -6,6 +6,10 @@ export default class Dialog {
    * @param {DialogNode} startNode
    */
   constructor(id, startNode) {
+    if (id == null || startNode == null) {
+      throw new Error("Cannot create Dialog because id or/and startNode is null.");
+    }
+
     this.id = id;
     this.startNode = startNode;
     this._currnetNode = startNode;
