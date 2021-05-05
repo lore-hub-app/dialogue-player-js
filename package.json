@@ -5,27 +5,24 @@
     "main": "dist/lorehub-dialog-player.js",
     "scripts": {
         "build": "webpack",
-        "build:browser": "webpack && cp dist/lorehub-dialog-player.js examples/browser",
         "test": "jest"
     },
     "devDependencies": {
         "@babel/core": "^7.14.0",
         "@babel/preset-env": "^7.14.1",
-        "bable-loader": "0.0.1-security",
+        "babel-loader": "^8.2.2",
         "jest": "^26.6.3",
         "jest-junit-reporter": "^1.1.0",
         "webpack": "^5.36.2",
         "webpack-cli": "^4.6.0"
     },
-    "description": "",
-    "dependencies": {},
     "repository": {
         "type": "git",
         "url": "git+https://github.com/lore-hub-app/dialog-player-js.git"
     },
     "keywords": [],
-    "author": "",
-    "license": "ISC",
+    "author": "Andrei Kniazev <worldpwn@hotmail.com>",
+    "license": "Apache License 2.0",
     "bugs": {
         "url": "https://github.com/lore-hub-app/dialog-player-js/issues"
     },
