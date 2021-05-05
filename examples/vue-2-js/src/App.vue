@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { Dialog, DialogNode, DialogTextContent } from "../../../src/index";
+import { Dialog, DialogNode, DialogTextContent } from "lorehub-dialog-player";
 
 export default {
   name: "App",

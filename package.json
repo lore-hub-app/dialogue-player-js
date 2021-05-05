@@ -1,6 +1,6 @@
 {
     "name": "lorehub-dialog-player",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "private": false,
     "main": "dist/lorehub-dialog-player.js",
     "files": [
