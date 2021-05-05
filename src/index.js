@@ -6,7 +6,7 @@ import ContetnBlockDTO from './dto/ContetnBlockDTO';
 import DialogDTO from './dto/DialogDTO';
 import DialogNodeDTO from './dto/DialogNodeDTO';
 
-export default {
+export {
     convertDataToDialog,
     Dialog,
     DialogNode,
