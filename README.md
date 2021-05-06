@@ -3,7 +3,7 @@
 ![CI](https://github.com/lore-hub-app/dialog-player-js/actions/workflows/ci.yml/badge.svg)
 ![CD](https://github.com/lore-hub-app/dialog-player-js/actions/workflows/cd.yml/badge.svg)
 
-![Uploading image.png…]()
+![image](https://user-images.githubusercontent.com/6351780/117262218-df56a880-ae05-11eb-9f16-d59c0fc1f777.png)
 
 
 ## Examples
