@@ -4,5 +4,9 @@
 ![CD](https://github.com/lore-hub-app/dialog-player-js/actions/workflows/cd.yml/badge.svg)
 
 
-Install:
-npm i lorehub-dialog-player
+## Examples
+[Vue 2 js](https://github.com/lore-hub-app/dialog-player-js/tree/main/examples/vue-2-js)
+
+
+## Install
+`npm i lorehub-dialog-player`
