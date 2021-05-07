@@ -1,2 +1,312 @@
-!function(n,t){"object"==typeof exports&&"object"==typeof module?module.exports=t():"function"==typeof define&&define.amd?define([],t):"object"==typeof exports?exports["lorehub-dialog-player"]=t():n["lorehub-dialog-player"]=t()}(this,(function(){return(()=>{"use strict";var n={d:(t,e)=>{for(var o in e)n.o(e,o)&&!n.o(t,o)&&Object.defineProperty(t,o,{enumerable:!0,get:e[o]})},o:(n,t)=>Object.prototype.hasOwnProperty.call(n,t),r:n=>{"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(n,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(n,"__esModule",{value:!0})}},t={};function e(n,t){for(var e=0;e<t.length;e++){var o=t[e];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(n,o.key,o)}}n.r(t),n.d(t,{ContetnBlockDTO:()=>l,Dialog:()=>o,DialogDTO:()=>s,DialogNode:()=>a,DialogNodeDTO:()=>d,DialogTextContent:()=>u,convertDataToDialog:()=>c});var o=function(){function n(t,e){if(function(n,t){if(!(n instanceof t))throw new TypeError("Cannot call a class as a function")}(this,n),null==t||null==e)throw new Error("Cannot create Dialog because id or/and startNode is null.");this.id=t,this.startNode=e,this._currnetNode=e,e.subscribe(this)}var t,o,r;return t=n,(o=[{key:"currentNode",get:function(){return this._currnetNode}},{key:"finished",get:function(){return null==this._currnetNode.nextNode}},{key:"onNext",value:function(n){this._currnetNode.unsubscribe(this),n.subscribe(this),this._currnetNode=n}}])&&e(t.prototype,o),r&&e(t,r),n}();function r(n,t){if(!(n instanceof t))throw new TypeError("Cannot call a class as a function")}function i(n,t){for(var e=0;e<t.length;e++){var o=t[e];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(n,o.key,o)}}var a=function(){function n(t,e){var o=arguments.length>2&&void 0!==arguments[2]?arguments[2]:null;if(r(this,n),null==t||null==e)throw new Error("Cannot create DialogNode because id: ".concat(t," or content: ").concat(e," is null."));this.id=t,this.nextNode=o,null==e.length?this.content=[e]:this.content=e,this.subscribers=[]}var t,e,o;return t=n,(e=[{key:"goNext",value:function(){var n=this;if(null==this.nextNode)throw new Error("NextNode is null, so I cannot go to next one.");this.subscribers.forEach((function(t){t.onNext(n.nextNode)}))}},{key:"subscribe",value:function(n){if(null==n.onNext)throw new Error("You cannot subscribe because 'onNext' function is not defined.");this.subscribers.push(n)}},{key:"unsubscribe",value:function(n){var t=this.subscribers.findIndex((function(t){return t===n}));t>-1&&this.subscribers.splice(t,1)}}])&&i(t.prototype,e),o&&i(t,o),n}();var u=function n(t,e){!function(n,t){if(!(n instanceof t))throw new TypeError("Cannot call a class as a function")}(this,n),this.id=t,this.value=e};function c(n,t,e){if(null==n||null==t||null==e)throw new Error("Cannot convert DTOs to a Dialog because \n      dialogDTO: ".concat(n," cannot be null OR \n      dialogNodesDTO: ").concat(t," cannot be null OR \n      contentBlocksDTO: ").concat(e," cannot be null."));var r=function(n,t){for(var e=[],o=function(o){for(var r=n[o],i=t.filter((function(n){return n.dialogNodeId==r.id})).sort((function(n,t){return n.index>t.index?1:-1})),c=[],l=0;l<i.length;l++){var s=i[l];if("text"!==s.type)throw new Error("Cannot convert to DialogContent for type ".concat(s.type,"."));var f=new u(s.id,s.data[0].text);c.push(f)}e.push(new a(r.id,c,null))},r=0;r<n.length;r++)o(r);for(var i=function(t){var o=n[t],r=e[t];o.nextDialogNodeId&&(r.nextNode=e.find((function(n){return n.id===o.nextDialogNodeId})))},c=0;c<e.length;c++)i(c);return e}(t,e).find((function(t){return t.id===n.startingNodeId}));if(null==r)throw new Error("Cannot find starting node with id ".concat(n.startingNodeId,"."));return new o(n.id,r)}var l=function n(t,e,o,r,i){!function(n,t){if(!(n instanceof t))throw new TypeError("Cannot call a class as a function")}(this,n),this.id=t,this.dialogNodeId=e,this.type=o,this.index=r,this.data=i};var s=function n(t,e){!function(n,t){if(!(n instanceof t))throw new TypeError("Cannot call a class as a function")}(this,n),this.id=t,this.startingNodeId=e};function f(n,t){if(!(n instanceof t))throw new TypeError("Cannot call a class as a function")}var d=function n(t){var e=arguments.length>1&&void 0!==arguments[1]?arguments[1]:null;f(this,n),this.id=t,this.nextDialogNodeId=e};return t})()}));
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define([], factory);
+	else if(typeof exports === 'object')
+		exports["lorehub-dialog-player"] = factory();
+	else
+		root["lorehub-dialog-player"] = factory();
+})(this, function() {
+return /******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	// The require scope
+/******/ 	var __webpack_require__ = {};
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "ContetnBlockDTO": () => (/* reexport */ ContetnBlockDTO),
+  "Dialog": () => (/* reexport */ Dialog),
+  "DialogDTO": () => (/* reexport */ DialogDTO),
+  "DialogNode": () => (/* reexport */ DialogNode),
+  "DialogNodeDTO": () => (/* reexport */ DialogNodeDTO),
+  "DialogTextContent": () => (/* reexport */ DialogContent),
+  "convertDataToDialog": () => (/* reexport */ convertDataToDialog)
+});
+
+;// CONCATENATED MODULE: ./src/Dialog.js
+
+
+class Dialog {
+  /**
+   * @param {String} id
+   * @param {DialogNode} startNode
+   */
+  constructor(id, startNode) {
+    if (id == null || startNode == null) {
+      throw new Error("Cannot create Dialog because id or/and startNode is null.");
+    }
+
+    this.id = id;
+    this.startNode = startNode;
+    this._currnetNode = startNode;
+
+    startNode.subscribe(this);
+  }
+
+  /**
+   * @returns {DialogNode}
+   */
+  get currentNode() {
+    return this._currnetNode;
+  }
+
+  /**
+   * @returns {boolean}
+   */
+  get finished() {
+    if (this._currnetNode.nextNode == null) return true;
+    return false;
+  }
+
+  /**
+   * @param {DialogNode} nextNode
+   */
+  onNext(nextNode) {
+    this._currnetNode.unsubscribe(this);
+    nextNode.subscribe(this);
+    this._currnetNode = nextNode;
+  }
+}
+
+;// CONCATENATED MODULE: ./src/DialogNode.js
+
+class DialogNode {
+  /**
+   * @param {String} id
+   * @param {Array<DialogTextContent> | DialogTextContent} content
+   * @param {DialogNode|null} nextNode
+   */
+  constructor(id, content, nextNode = null) {
+    if (id == null || content == null) {
+      throw new Error(
+        `Cannot create DialogNode because id: ${id} or content: ${content} is null.`
+      );
+    }
+
+    this.id = id;
+    this.nextNode = nextNode;
+
+    if (content.length == null) {
+      this.content = [content];
+    } else {
+      this.content = content;
+    }
+
+    this.subscribers = [];
+  }
+
+  /**
+   * @throws error when next node is null.
+   */
+  goNext() {
+    if (this.nextNode == null) {
+      throw new Error("NextNode is null, so I cannot go to next one.");
+    }
+
+    this.subscribers.forEach(observer => {
+      observer.onNext(this.nextNode);
+    });
+  }
+
+  subscribe(subscriber) {
+    if (subscriber.onNext == null) {
+      throw new Error(
+        "You cannot subscribe because 'onNext' function is not defined."
+      );
+    }
+    this.subscribers.push(subscriber);
+  }
+
+  unsubscribe(subscriber) {
+    const toRemoveIndex = this.subscribers.findIndex(e => e === subscriber);
+    if (toRemoveIndex > -1) {
+      this.subscribers.splice(toRemoveIndex, 1);
+    }
+  }
+}
+
+;// CONCATENATED MODULE: ./src/DialogTextContent.js
+class DialogContent {
+  /**
+   * @param {string} id
+   * @param {string} value
+   */
+  constructor(id, value) {
+    this.id = id;
+    this.value = value;
+  }
+}
+
+;// CONCATENATED MODULE: ./src/convertDataToDialog.js
+
+
+
+
+
+
+
+/**
+ * Will convert data from server to a dialog.
+ * @param {DialogDTO} dialogDTO
+ * @param {Array<DialogNodeDTO>} dialogNodesDTO
+ * @param {Array<ContetnBlockDTO>} contentBlocksDTO
+ * @returns {Dialog}
+ */
+function convertDataToDialog(
+  dialogDTO,
+  dialogNodesDTO,
+  contentBlocksDTO
+) {
+  if (dialogDTO == null || dialogNodesDTO == null || contentBlocksDTO == null) {
+    throw new Error(
+      `Cannot convert DTOs to a Dialog because 
+      dialogDTO: ${dialogDTO} cannot be null OR 
+      dialogNodesDTO: ${dialogNodesDTO} cannot be null OR 
+      contentBlocksDTO: ${contentBlocksDTO} cannot be null.`
+    );
+  }
+
+  const nodes = createDialogNodes(dialogNodesDTO, contentBlocksDTO);
+  const startingNode = nodes.find(n => n.id === dialogDTO.startingNodeId);
+
+  if (startingNode == null) {
+    throw new Error(
+      `Cannot find starting node with id ${dialogDTO.startingNodeId}.`
+    );
+  }
+  const dialog = new Dialog(dialogDTO.id, startingNode);
+  return dialog;
+}
+
+/**
+ * @param {Array<DialogNodeDTO>} dialogNodesDTO
+ * @param {Array<ContetnBlockDTO>} contentBlocksDTO
+ */
+function createDialogNodes(dialogNodesDTO, contentBlocksDTO) {
+  let nodes = [];
+  for (let i = 0; i < dialogNodesDTO.length; i++) {
+    const dto = dialogNodesDTO[i];
+    const contentDTOs = contentBlocksDTO
+      .filter(c => c.dialogNodeId == dto.id)
+      .sort((a, b) => (a.index > b.index ? 1 : -1));
+    let contentForNode = [];
+    for (let i = 0; i < contentDTOs.length; i++) {
+      const contentDTO = contentDTOs[i];
+      if (contentDTO.type === "text") {
+        const content = new DialogContent(
+          contentDTO.id,
+          contentDTO.data.text
+        );
+        contentForNode.push(content);
+      } else {
+        throw new Error(
+          `Cannot convert to DialogContent for type ${contentDTO.type}.`
+        );
+      }
+    }
+    nodes.push(new DialogNode(dto.id, contentForNode, null));
+  }
+
+  for (let i = 0; i < nodes.length; i++) {
+    const dto = dialogNodesDTO[i];
+    const node = nodes[i];
+    if (dto.nextDialogNodeId) {
+      node.nextNode = nodes.find(n => n.id === dto.nextDialogNodeId);
+    }
+  }
+  return nodes;
+}
+
+;// CONCATENATED MODULE: ./src/dto/ContetnBlockDTO.js
+class ContetnBlockDTO {
+  /**
+   * @param {String} id
+   * @param {String} dialogNodeId
+   * @param {String} type
+   * @param {Number} index
+   * @param {Array<any>} data
+   */
+  constructor(id, dialogNodeId, type, index, data) {
+    this.id = id;
+    this.dialogNodeId = dialogNodeId;
+    this.type = type;
+    this.index = index;
+    this.data = data;
+  }
+}
+
+;// CONCATENATED MODULE: ./src/dto/DialogDTO.js
+class DialogDTO {
+  /**
+   * @param {String} id
+   * @param {String} startingNodeId
+   */
+  constructor(id, startingNodeId) {
+    this.id = id;
+    this.startingNodeId = startingNodeId;
+  }
+}
+
+;// CONCATENATED MODULE: ./src/dto/DialogNodeDTO.js
+class DialogNodeDTO {
+  /**
+   * @param {String} id
+   * @param {String | null} nextDialogNodeId
+   */
+  constructor(id, nextDialogNodeId = null) {
+    this.id = id;
+    this.nextDialogNodeId = nextDialogNodeId;
+  }
+}
+
+;// CONCATENATED MODULE: ./src/index.js
+
+
+
+
+
+
+
+
+
+
+/******/ 	return __webpack_exports__;
+/******/ })()
+;
+});
 //# sourceMappingURL=lorehub-dialog-player.js.map

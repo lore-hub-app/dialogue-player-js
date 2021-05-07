@@ -12,15 +12,15 @@ module.exports = {
         libraryTarget: 'umd',
         globalObject: 'this',
     },
-    module: {
-        rules: [{
-            test: /\.js$/,
-            exclude: /(node_modules)/,
-            use: 'babel-loader',
-        }],
-    },
+    // module: {
+    //     rules: [{
+    //         test: /\.js$/,
+    //         exclude: /(node_modules)/,
+    //         use: 'babel-loader',
+    //     }],
+    // },
     optimization: {
-        minimize: true,
+        minimize: false,
         minimizer: [new TerserPlugin({
             extractComments: true,
             terserOptions: {

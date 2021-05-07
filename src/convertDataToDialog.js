@@ -55,7 +55,7 @@ function createDialogNodes(dialogNodesDTO, contentBlocksDTO) {
       if (contentDTO.type === "text") {
         const content = new DialogTextContent(
           contentDTO.id,
-          contentDTO.data[0].text
+          contentDTO.data.text
         );
         contentForNode.push(content);
       } else {
