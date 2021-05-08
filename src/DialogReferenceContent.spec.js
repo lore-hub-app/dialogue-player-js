@@ -8,7 +8,7 @@ describe("DialogReferenceContent.ctor", () => {
         const documentId = "1C3D3BCD-BCE3-49C4-8F52-9586FE1A31B9";
 
         // act
-        const content = new DialogTextContent(id, text, documentId);
+        const content = new DialogReferenceContent(id, text, documentId);
 
         // assert
         expect(content.id).toBe(id);
