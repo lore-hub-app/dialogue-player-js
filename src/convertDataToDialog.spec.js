@@ -3,6 +3,8 @@ import DialogDTO from "./dto/DialogDTO";
 import DialogNodeDTO from "./dto/DialogNodeDTO";
 import ContentBlockDTO from "./dto/ContentBlockDTO";
 
+
+
 describe("convertDataToDialog", () => {
   it("correct data, should convert", () => {
     // arrange
@@ -15,13 +17,11 @@ describe("convertDataToDialog", () => {
       dialogNodeTwoDTO.id,
       "text",
       0,
-      [
-        {
-          id: "89a85f64-5717-4562-b3fc-2c963f66afa6",
-          lang: null,
-          text: "I am fine!",
-        },
-      ]
+      {
+        id: "89a85f64-5717-4562-b3fc-2c963f66afa6",
+        lang: null,
+        text: "I am fine!",
+      },
     );
 
     const dialogNodeOneDTO = new DialogNodeDTO(
@@ -34,13 +34,11 @@ describe("convertDataToDialog", () => {
       dialogNodeOneDTO.id,
       "text",
       0,
-      [
-        {
-          id: "23385f64-5717-4562-b3fc-2c963f66afa6",
-          lang: null,
-          text: "Hey how are you",
-        },
-      ]
+      {
+        id: "23385f64-5717-4562-b3fc-2c963f66afa6",
+        lang: null,
+        text: "Hey how are you",
+      },
     );
 
     const dialogDTO = new DialogDTO(
@@ -73,13 +71,11 @@ describe("convertDataToDialog", () => {
       dialogNodeOneDTO.id,
       "text",
       0,
-      [
-        {
-          id: "13385f64-5717-4562-b3fc-2c963f66afa6",
-          lang: null,
-          text: "Hey!",
-        },
-      ]
+      {
+        id: "13385f64-5717-4562-b3fc-2c963f66afa6",
+        lang: null,
+        text: "Hey!",
+      },
     );
 
     const contentSecond = new ContentBlockDTO(
@@ -87,13 +83,11 @@ describe("convertDataToDialog", () => {
       dialogNodeOneDTO.id,
       "text",
       1,
-      [
-        {
-          id: "23385f64-5717-4562-b3fc-2c963f66afa6",
-          lang: null,
-          text: "How are you",
-        },
-      ]
+      {
+        id: "23385f64-5717-4562-b3fc-2c963f66afa6",
+        lang: null,
+        text: "How are you",
+      },
     );
 
     const dialogDTO = new DialogDTO(
