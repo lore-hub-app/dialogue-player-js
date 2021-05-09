@@ -1,5 +1,5 @@
-import ContentDataReference from './content/ContentDataReference';
-import ContentDataText from './content/ContentDataText';
+import ContentDataReference from './content/ContentDataReferenceDTO';
+import ContentDataText from './content/ContentDataTextDTO';
 
 export default class ContentBlockDTO {
   /**
