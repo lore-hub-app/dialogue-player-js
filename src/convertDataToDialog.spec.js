@@ -1,7 +1,7 @@
 import convertDataToDialog from "./convertDataToDialog";
 import DialogDTO from "./dto/DialogDTO";
 import DialogNodeDTO from "./dto/DialogNodeDTO";
-import ContetnBlockDTO from "./dto/ContetnBlockDTO";
+import ContentBlockDTO from "./dto/ContentBlockDTO";
 
 describe("convertDataToDialog", () => {
   it("correct data, should convert", () => {
@@ -10,7 +10,7 @@ describe("convertDataToDialog", () => {
     const dialogNodeTwoDTO = new DialogNodeDTO(
       "D4E3768F-E481-4075-9851-4A9C9848FE09"
     );
-    const contentTwo = new ContetnBlockDTO(
+    const contentTwo = new ContentBlockDTO(
       "45a85f64-5717-4562-b3fc-2c963f66afa6",
       dialogNodeTwoDTO.id,
       "text",
@@ -29,7 +29,7 @@ describe("convertDataToDialog", () => {
       dialogNodeTwoDTO.id
     );
 
-    const contentOne = new ContetnBlockDTO(
+    const contentOne = new ContentBlockDTO(
       "3fa85f64-5717-4562-b3fc-2c963f66afa6",
       dialogNodeOneDTO.id,
       "text",
@@ -60,7 +60,7 @@ describe("convertDataToDialog", () => {
     expect(dialog.startNode.id).toBe(dialogNodeOneDTO.id);
   });
 
-  it("content is not in oreder of indexes, should set the correct order", () => {
+  it("content is not in order of indexes, should set the correct order", () => {
     // arrange
 
     const dialogNodeOneDTO = new DialogNodeDTO(
@@ -68,7 +68,7 @@ describe("convertDataToDialog", () => {
       null
     );
 
-    const contentFirst = new ContetnBlockDTO(
+    const contentFirst = new ContentBlockDTO(
       "1fa85f64-5717-4562-b3fc-2c963f66afa6",
       dialogNodeOneDTO.id,
       "text",
@@ -82,7 +82,7 @@ describe("convertDataToDialog", () => {
       ]
     );
 
-    const contentSecond = new ContetnBlockDTO(
+    const contentSecond = new ContentBlockDTO(
       "2fa85f64-5717-4562-b3fc-2c963f66afa6",
       dialogNodeOneDTO.id,
       "text",

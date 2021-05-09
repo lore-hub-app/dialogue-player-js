@@ -3,13 +3,13 @@ import DialogNode from "./DialogNode";
 import DialogTextContent from "./DialogTextContent";
 import DialogDTO from "./dto/DialogDTO";
 import DialogNodeDTO from "./dto/DialogNodeDTO";
-import ContetnBlockDTO from "./dto/ContetnBlockDTO";
+import ContentBlockDTO from "./dto/ContentBlockDTO";
 
 /**
  * Will convert data from server to a dialog.
  * @param {DialogDTO} dialogDTO
  * @param {Array<DialogNodeDTO>} dialogNodesDTO
- * @param {Array<ContetnBlockDTO>} contentBlocksDTO
+ * @param {Array<ContentBlockDTO>} contentBlocksDTO
  * @returns {Dialog}
  */
 export default function convertDataToDialog(
@@ -40,7 +40,7 @@ export default function convertDataToDialog(
 
 /**
  * @param {Array<DialogNodeDTO>} dialogNodesDTO
- * @param {Array<ContetnBlockDTO>} contentBlocksDTO
+ * @param {Array<ContentBlockDTO>} contentBlocksDTO
  */
 function createDialogNodes(dialogNodesDTO, contentBlocksDTO) {
   let nodes = [];
