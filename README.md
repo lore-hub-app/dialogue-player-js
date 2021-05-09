@@ -13,3 +13,7 @@
 
 ## Install
 `npm i lorehub-dialog-player`
+
+
+## Schema
+![image](https://user-images.githubusercontent.com/6351780/117565376-b16f9f00-b065-11eb-9ee1-9c68b6a491b7.png)
