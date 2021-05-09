@@ -51,6 +51,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.d(__webpack_exports__, {
   "Dialog": () => (/* reexport */ Dialog),
   "DialogNode": () => (/* reexport */ DialogNode),
+  "DialogReferenceContent": () => (/* reexport */ ContentDataReference),
   "DialogTextContent": () => (/* reexport */ DialogContent),
   "convertDataToDialog": () => (/* reexport */ convertDataToDialog)
 });
@@ -288,6 +289,7 @@ function createDialogNodes(dialogNodeDTOs, contentBlockDTOs, documentDTOs) {
 }
 
 ;// CONCATENATED MODULE: ./src/index.js
+
 
 
 
