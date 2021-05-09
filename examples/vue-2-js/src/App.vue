@@ -20,8 +20,7 @@ import {
   DialogNode,
   DialogTextContent,
   DialogReferenceContent,
-} from "../../../src/index";
-//"lorehub-dialog-player";
+} from "lorehub-dialog-player";
 
 export default {
   name: "App",
