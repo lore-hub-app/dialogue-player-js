@@ -12,13 +12,6 @@ module.exports = {
         libraryTarget: 'umd',
         globalObject: 'this',
     },
-    // module: {
-    //     rules: [{
-    //         test: /\.js$/,
-    //         exclude: /(node_modules)/,
-    //         use: 'babel-loader',
-    //     }],
-    // },
     optimization: {
         minimize: false,
         minimizer: [new TerserPlugin({

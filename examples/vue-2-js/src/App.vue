@@ -2,8 +2,9 @@
   <div class="ff7">
     <div>
       <div v-for="(item, index) in content" :key="item.id">
-        <span v-if="index !== 0">&ldquo;</span>{{ item.value
-        }}<span v-if="index !== 0">&ldquo;</span>
+        <span v-if="index !== 0">&ldquo;</span>
+        {{ item.text }}
+        <span v-if="index !== 0">&ldquo;</span>
       </div>
     </div>
 
@@ -14,7 +15,12 @@
 </template>
 
 <script>
-import { Dialog, DialogNode, DialogTextContent } from "lorehub-dialog-player";
+import {
+  Dialog,
+  DialogNode,
+  DialogTextContent,
+  DialogReferenceContent,
+} from "lorehub-dialog-player";
 
 export default {
   name: "App",
@@ -31,17 +37,14 @@ export default {
   created() {
     const lastNode = new DialogNode(
       "node-2",
-      [
-        new DialogTextContent("text-1", "Cloud"),
-        new DialogTextContent("text-2", "But it is time to say bye!"),
-      ],
+      [new DialogTextContent("text-1", "Cloud leaves")],
       null
     );
 
     const startNode = new DialogNode(
       "node-1",
       [
-        new DialogTextContent("text-3", "Cloud"),
+        new DialogReferenceContent("text-3", null, "doc-1", "Cloud"),
         new DialogTextContent(
           "text-4",
           "No one lives in the slums because they want to. It's like this train. It can't run anywhere except where its rails take it."
