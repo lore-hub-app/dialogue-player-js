@@ -1,10 +1,13 @@
-export default class ContetnBlockDTO {
+import ContentDataReference from './content/ContentDataReference';
+import ContentDataText from './content/ContentDataText';
+
+export default class ContentBlockDTO {
   /**
    * @param {String} id
    * @param {String} dialogNodeId
-   * @param {String} type
+   * @param {String} type can be 'text' or 'reference'
    * @param {Number} index
-   * @param {Array<any>} data
+   * @param {ContentDataReference | ContentDataText } data
    */
   constructor(id, dialogNodeId, type, index, data) {
     this.id = id;
