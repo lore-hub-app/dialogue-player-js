@@ -1,10 +1,10 @@
 export default class DialogContent {
   /**
    * @param {string} id
-   * @param {string} value
+   * @param {string} text
    */
-  constructor(id, value) {
+  constructor(id, text) {
     this.id = id;
-    this.value = value;
+    this.text = text;
   }
 }
