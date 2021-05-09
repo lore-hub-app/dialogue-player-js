@@ -2,7 +2,7 @@ import DialogTextContent from "./DialogTextContent";
 export default class DialogNode {
   /**
    * @param {String} id
-   * @param {Array<DialogTextContent> | DialogTextContent} content
+   * @param {DialogTextContent | DialogTextContent} content
    * @param {DialogNode|null} nextNode
    */
   constructor(id, content, nextNode = null) {
@@ -11,15 +11,9 @@ export default class DialogNode {
         `Cannot create DialogNode because id: ${id} or content: ${content} is null.`
       );
     }
-
     this.id = id;
     this.nextNode = nextNode;
-
-    if (content.length == null) {
-      this.content = [content];
-    } else {
-      this.content = content;
-    }
+    this.content = content;
 
     this.subscribers = [];
   }

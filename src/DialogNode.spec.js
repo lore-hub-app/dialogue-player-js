@@ -38,21 +38,6 @@ describe("DialogNode.ctor", () => {
     expect(node.nextNode).toBe(nextNode);
   });
 
-  it("correct data and content is not array, should add as array", () => {
-    // arrange
-    const id = "8C3D3BCD-BCE3-49C4-8F52-9586FE1A31B9";
-    const nextNode = new DialogNode(
-      "77EB32BA-3560-4D93-B322-983A26AF51A9",
-      testContent,
-      null
-    );
-
-    // act
-    const node = new DialogNode(id, testContent, nextNode);
-
-    // assert
-    expect(node.content[0]).toBe(testContent);
-  });
 });
 
 describe("DialogNode.subscribe", () => {
@@ -81,7 +66,7 @@ describe("DialogNode.subscribe", () => {
     expect(node.subscribers[0]).toBe(observer);
   });
 
-  it("subscriber doenst have onNext function, should throw", () => {
+  it("subscriber doesn't have onNext function, should throw", () => {
     // arrange
     const observer = {};
 
