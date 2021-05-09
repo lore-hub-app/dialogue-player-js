@@ -49,11 +49,8 @@ __webpack_require__.r(__webpack_exports__);
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
-  "ContetnBlockDTO": () => (/* reexport */ ContetnBlockDTO),
   "Dialog": () => (/* reexport */ Dialog),
-  "DialogDTO": () => (/* reexport */ DialogDTO),
   "DialogNode": () => (/* reexport */ DialogNode),
-  "DialogNodeDTO": () => (/* reexport */ DialogNodeDTO),
   "DialogTextContent": () => (/* reexport */ DialogContent),
   "convertDataToDialog": () => (/* reexport */ convertDataToDialog)
 });
@@ -108,7 +105,7 @@ class Dialog {
 class DialogNode {
   /**
    * @param {String} id
-   * @param {Array<DialogTextContent> | DialogTextContent} content
+   * @param {DialogTextContent | DialogTextContent} content
    * @param {DialogNode|null} nextNode
    */
   constructor(id, content, nextNode = null) {
@@ -117,15 +114,9 @@ class DialogNode {
         `Cannot create DialogNode because id: ${id} or content: ${content} is null.`
       );
     }
-
     this.id = id;
     this.nextNode = nextNode;
-
-    if (content.length == null) {
-      this.content = [content];
-    } else {
-      this.content = content;
-    }
+    this.content = content;
 
     this.subscribers = [];
   }
@@ -164,12 +155,35 @@ class DialogNode {
 class DialogContent {
   /**
    * @param {string} id
-   * @param {string} value
+   * @param {string} text
    */
-  constructor(id, value) {
+  constructor(id, text) {
     this.id = id;
-    this.value = value;
+    this.text = text;
   }
+}
+
+;// CONCATENATED MODULE: ./src/DialogReferenceContent.js
+class ContentDataReference {
+    /**
+    * @param {string} id
+    * @param {string | null} text
+    * @param {string | null} documentId
+    */
+    constructor(id, text, documentId, documentName) {
+        this.id = id;
+        this._text = text;
+        this.documentId = documentId;
+        this.documentName = documentName
+    }
+
+    /**
+     * Will use document name if text is null.
+     */
+    get text() {
+        return this._text == null ? this.documentName : this._text;
+    }
+
 }
 
 ;// CONCATENATED MODULE: ./src/convertDataToDialog.js
@@ -180,28 +194,36 @@ class DialogContent {
 
 
 
+
+
 /**
  * Will convert data from server to a dialog.
  * @param {DialogDTO} dialogDTO
- * @param {Array<DialogNodeDTO>} dialogNodesDTO
- * @param {Array<ContetnBlockDTO>} contentBlocksDTO
+ * @param {Array<DialogNodeDTO>} dialogNodeDTOs
+ * @param {Array<ContentBlockDTO>} contentBlockDTOs
+ * @param {Array<DocumentDTO>} documentDTOs
  * @returns {Dialog}
  */
 function convertDataToDialog(
   dialogDTO,
-  dialogNodesDTO,
-  contentBlocksDTO
+  dialogNodeDTOs,
+  contentBlockDTOs,
+  documentDTOs
 ) {
-  if (dialogDTO == null || dialogNodesDTO == null || contentBlocksDTO == null) {
+  if (dialogDTO == null ||
+    dialogNodeDTOs == null ||
+    contentBlockDTOs == null ||
+    documentDTOs == null) {
     throw new Error(
       `Cannot convert DTOs to a Dialog because 
       dialogDTO: ${dialogDTO} cannot be null OR 
-      dialogNodesDTO: ${dialogNodesDTO} cannot be null OR 
-      contentBlocksDTO: ${contentBlocksDTO} cannot be null.`
+      dialogNodeDTOs: ${dialogNodeDTOs} cannot be null OR 
+      contentBlockDTOs: ${contentBlockDTOs} cannot be null OR
+      documentDTOs: ${documentDTOs} cannot be null.`
     );
   }
 
-  const nodes = createDialogNodes(dialogNodesDTO, contentBlocksDTO);
+  const nodes = createDialogNodes(dialogNodeDTOs, contentBlockDTOs, documentDTOs);
   const startingNode = nodes.find(n => n.id === dialogDTO.startingNodeId);
 
   if (startingNode == null) {
@@ -214,26 +236,39 @@ function convertDataToDialog(
 }
 
 /**
- * @param {Array<DialogNodeDTO>} dialogNodesDTO
- * @param {Array<ContetnBlockDTO>} contentBlocksDTO
+ * @param {Array<DialogNodeDTO>} dialogNodeDTOs
+ * @param {Array<ContentBlockDTO>} contentBlockDTOs
+ * @param {Array<DocumentDTO>} documentDTOs
  */
-function createDialogNodes(dialogNodesDTO, contentBlocksDTO) {
+function createDialogNodes(dialogNodeDTOs, contentBlockDTOs, documentDTOs) {
   let nodes = [];
-  for (let i = 0; i < dialogNodesDTO.length; i++) {
-    const dto = dialogNodesDTO[i];
-    const contentDTOs = contentBlocksDTO
+  for (let i = 0; i < dialogNodeDTOs.length; i++) {
+    const dto = dialogNodeDTOs[i];
+    const contentDTOs = contentBlockDTOs
       .filter(c => c.dialogNodeId == dto.id)
       .sort((a, b) => (a.index > b.index ? 1 : -1));
     let contentForNode = [];
-    for (let i = 0; i < contentDTOs.length; i++) {
-      const contentDTO = contentDTOs[i];
+    for (let z = 0; z < contentDTOs.length; z++) {
+      const contentDTO = contentDTOs[z];
       if (contentDTO.type === "text") {
         const content = new DialogContent(
           contentDTO.id,
           contentDTO.data.text
         );
         contentForNode.push(content);
-      } else {
+      }
+      else if (contentDTO.type === 'reference') {
+        const neededDoc = documentDTOs.find(d => d.id === contentDTO.data.documentId);
+        if (neededDoc == null) throw new Error(`To create a node for a reference type I need document. I cannot find a document with id ${contentDTO.data.documentId}`);
+        const content = new ContentDataReference(
+          contentDTO.id,
+          contentDTO.data.text,
+          contentDTO.data.documentId,
+          neededDoc.name
+        )
+        contentForNode.push(content);
+      }
+      else {
         throw new Error(
           `Cannot convert to DialogContent for type ${contentDTO.type}.`
         );
@@ -243,7 +278,7 @@ function createDialogNodes(dialogNodesDTO, contentBlocksDTO) {
   }
 
   for (let i = 0; i < nodes.length; i++) {
-    const dto = dialogNodesDTO[i];
+    const dto = dialogNodeDTOs[i];
     const node = nodes[i];
     if (dto.nextDialogNodeId) {
       node.nextNode = nodes.find(n => n.id === dto.nextDialogNodeId);
@@ -252,52 +287,7 @@ function createDialogNodes(dialogNodesDTO, contentBlocksDTO) {
   return nodes;
 }
 
-;// CONCATENATED MODULE: ./src/dto/ContetnBlockDTO.js
-class ContetnBlockDTO {
-  /**
-   * @param {String} id
-   * @param {String} dialogNodeId
-   * @param {String} type
-   * @param {Number} index
-   * @param {Array<any>} data
-   */
-  constructor(id, dialogNodeId, type, index, data) {
-    this.id = id;
-    this.dialogNodeId = dialogNodeId;
-    this.type = type;
-    this.index = index;
-    this.data = data;
-  }
-}
-
-;// CONCATENATED MODULE: ./src/dto/DialogDTO.js
-class DialogDTO {
-  /**
-   * @param {String} id
-   * @param {String} startingNodeId
-   */
-  constructor(id, startingNodeId) {
-    this.id = id;
-    this.startingNodeId = startingNodeId;
-  }
-}
-
-;// CONCATENATED MODULE: ./src/dto/DialogNodeDTO.js
-class DialogNodeDTO {
-  /**
-   * @param {String} id
-   * @param {String | null} nextDialogNodeId
-   */
-  constructor(id, nextDialogNodeId = null) {
-    this.id = id;
-    this.nextDialogNodeId = nextDialogNodeId;
-  }
-}
-
 ;// CONCATENATED MODULE: ./src/index.js
-
-
-
 
 
 
