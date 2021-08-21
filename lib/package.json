@@ -1,6 +1,6 @@
 {
     "name": "lorehub-dialog-player",
-    "version": "1.0.7",
+    "version": "2.0.0",
     "private": false,
     "main": "dist/lorehub-dialog-player.js",
     "files": [
@@ -16,6 +16,7 @@
         "@babel/core": "^7.14.0",
         "@babel/preset-env": "^7.14.1",
         "babel-loader": "^8.2.2",
+        "eslint": "^7.32.0",
         "jest": "^26.6.3",
         "jest-junit-reporter": "^1.1.0",
         "terser-webpack-plugin": "^5.1.1",
