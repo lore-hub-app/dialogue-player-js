@@ -228,7 +228,7 @@
       "apiVersion": "1.0.0",
       "id": "f3171000-fce8-4916-a043-133a8c06dfc6",
       "text": "Yes, let's do it",
-      "nextDialogId": "de387b98-b262-4427-8e80-6cd9be354765",
+      "nextDialogueNodeId": "de387b98-b262-4427-8e80-6cd9be354765",
       "metaData": []
     },
     {
@@ -236,7 +236,7 @@
       "apiVersion": "1.0.0",
       "id": "4928f7ce-d469-4818-9335-f2b5e1ee6622",
       "text": "No, It is too dangerous",
-      "nextDialogId": "dd4e5ea3-4b0a-437a-8f26-94e1d4d9e627",
+      "nextDialogueNodeId": "dd4e5ea3-4b0a-437a-8f26-94e1d4d9e627",
       "metaData": []
     },
     {
@@ -244,7 +244,7 @@
       "apiVersion": "1.0.0",
       "id": "dad29f22-d30d-49f0-9cec-c8c06d52182f",
       "text": "Beastmen killed Arthur!",
-      "nextDialogId": "06becc2c-69d3-4c40-95b6-341c1dcb6652",
+      "nextDialogueNodeId": "06becc2c-69d3-4c40-95b6-341c1dcb6652",
       "metaData": [
         {
           "variableId": "dbc5b759-4349-465a-87c3-57989f7be1da",
@@ -257,7 +257,7 @@
       "apiVersion": "1.0.0",
       "id": "36d782e3-46d0-4169-ac5e-521be5a6c283",
       "text": "I don't know where he is.",
-      "nextDialogId": "fcd9d8fd-49d7-483a-81c9-1f3e4df9109a",
+      "nextDialogueNodeId": "fcd9d8fd-49d7-483a-81c9-1f3e4df9109a",
       "metaData": []
     },
     {
@@ -265,7 +265,7 @@
       "apiVersion": "1.0.0",
       "id": "45b61249-2c90-4068-b1c3-87b3c1fe5d24",
       "text": "Yes, he is alive.",
-      "nextDialogId": "0b037bf5-c308-4700-b03e-41a6e73d8d72",
+      "nextDialogueNodeId": "0b037bf5-c308-4700-b03e-41a6e73d8d72",
       "metaData": [
         {
           "variableId": "dbc5b759-4349-465a-87c3-57989f7be1da",
