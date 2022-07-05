@@ -40,13 +40,13 @@
 
 <script>
 import {
-  Dialog,
-  DialogNode,
-  DialogNodeOption,
-  DialogTextContent,
-  DialogReferenceContent,
-  GoToNextNode,
-} from "lorehub-dialog-player";
+  Dialogue,
+  DialogueNode,
+  DialogueTextContent,
+  DialogueReferenceContent,
+  DialogueNodeOption,
+  GoToNextNode
+} from "../../../lib/src/index";
 
 export default {
   name: "App",
@@ -69,30 +69,30 @@ export default {
     },
   },
   created() {
-    const thirdNode = new DialogNode("node-3", [
-      new DialogTextContent("text-1", "Cloud stops"),
+    const thirdNode = new DialogueNode("node-3", [
+      new DialogueTextContent("text-1", "Cloud stops"),
     ]);
-    const seconNode = new DialogNode(
+    const seconNode = new DialogueNode(
       "node-2",
-      [new DialogTextContent("text-1", "Cloud is leaving")],
+      [new DialogueTextContent("text-1", "Cloud is leaving")],
       null,
       [
-        new DialogNodeOption("option-1", "Please, stop!", thirdNode),
-        new DialogNodeOption("option-2", "Bye...", null),
+        new DialogueNodeOption("option-1", "Please, stop!", thirdNode),
+        new DialogueNodeOption("option-2", "Bye...", null),
       ]
     );
-    const startNode = new DialogNode(
+    const startNode = new DialogueNode(
       "node-1",
       [
-        new DialogReferenceContent("text-3", null, "doc-1", "Cloud"),
-        new DialogTextContent(
+        new DialogueReferenceContent("text-3", null, "doc-1", "Cloud"),
+        new DialogueTextContent(
           "text-4",
           "No one lives in the slums because they want to. It's like this train. It can't run anywhere except where its rails take it."
         ),
       ],
       seconNode
     );
-    this.dialog = new Dialog("dialog-1", startNode);
+    this.dialog = new Dialogue("dialog-1", startNode);
   },
   methods: {
     next(nextNode) {
