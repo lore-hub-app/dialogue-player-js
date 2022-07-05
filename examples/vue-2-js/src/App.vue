@@ -6,11 +6,11 @@
         <h2>State, Variables:</h2>
         <div v-for="variable in variables" :key="variable.id">{{ variable.name }}: {{ variable.currentValue }}</div>
       </div>
-      <div>
+      <!-- <div>
         <h2>State, Variables:</h2>
         <div>is_arthut_dead: true</div>
         <div>is_arthut_dead: true</div>
-      </div>
+      </div> -->
     </div>
 
     <!-- FINISH SCREEN -->
@@ -30,7 +30,7 @@
           > Next
         </div>
         <div class="btn" v-for="(option, index) in dialog.currentNode.options" :key="index" @click="next(option)">
-          > {{ option.text }} {{ option.requiredVariables }}
+          > {{ option.text }} (disabled: {{ option.isDisabled }})
         </div>
       </div>
     </div>
