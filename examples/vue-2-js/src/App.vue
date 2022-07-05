@@ -26,12 +26,11 @@
       </div>
       <div v-if="!dialog.finished">
         <div v-if="dialog.currentNode.options && dialog.currentNode.options.length === 0" class="btn"
-          @click="next(dialog.currentNode.nextNode)">
+          @click="next(dialog.currentNode)">
           > Next
         </div>
-        <div class="btn" v-for="(option, index) in dialog.currentNode.options" :key="index"
-          @click="next(option.nextNode)">
-          > {{ option.text }}
+        <div class="btn" v-for="(option, index) in dialog.currentNode.options" :key="index" @click="next(option)">
+          > {{ option.text }} {{ option.requiredVariables }}
         </div>
       </div>
     </div>
@@ -83,8 +82,8 @@ export default {
     this.dialog = convertExportDataToDialogue(json);
   },
   methods: {
-    next(nextNode) {
-      const command = new GoToNextNode(this.dialog, nextNode);
+    next(selected) {
+      const command = new GoToNextNode(this.dialog, selected);
       command.execute();
       this.commands.push(command);
     },
