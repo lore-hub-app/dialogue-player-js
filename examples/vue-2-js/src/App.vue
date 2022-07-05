@@ -6,14 +6,14 @@
     <!-- DIALOG -->
     <div v-else class="ff7">
       <div>
-        <div v-for="(item, index) in content" :key="item.id">
+        <div v-for="(item, index) in content" :key="index">
           <span v-if="index !== 0">&ldquo;</span>{{ item.text
           }}<span v-if="index !== 0">&ldquo;</span>
         </div>
       </div>
       <div v-if="!dialog.finished">
         <div
-          v-if="dialog.currentNode.options.length === 0"
+          v-if="dialog.currentNode.options && dialog.currentNode.options.length === 0"
           class="btn"
           @click="next(dialog.currentNode.nextNode)"
         >
@@ -21,8 +21,8 @@
         </div>
         <div
           class="btn"
-          v-for="option in dialog.currentNode.options"
-          :key="option.id"
+          v-for="(option, index) in dialog.currentNode.options"
+          :key="index"
           @click="next(option.nextNode)"
         >
           > {{ option.text }}
@@ -45,8 +45,10 @@ import {
   DialogueTextContent,
   DialogueReferenceContent,
   DialogueNodeOption,
-  GoToNextNode
+  GoToNextNode,
+  convertExportDataToDialogue
 } from "../../../lib/src/index";
+import json from '../../../lib/tests/examples/scene-01'
 
 export default {
   name: "App",
@@ -58,6 +60,7 @@ export default {
   },
   computed: {
     currentNode() {
+      console.log(this.dialog?.currentNode)
       return this.dialog?.currentNode;
     },
     content() {
@@ -69,30 +72,7 @@ export default {
     },
   },
   created() {
-    const thirdNode = new DialogueNode("node-3", [
-      new DialogueTextContent("text-1", "Cloud stops"),
-    ]);
-    const seconNode = new DialogueNode(
-      "node-2",
-      [new DialogueTextContent("text-1", "Cloud is leaving")],
-      null,
-      [
-        new DialogueNodeOption("option-1", "Please, stop!", thirdNode),
-        new DialogueNodeOption("option-2", "Bye...", null),
-      ]
-    );
-    const startNode = new DialogueNode(
-      "node-1",
-      [
-        new DialogueReferenceContent("text-3", null, "doc-1", "Cloud"),
-        new DialogueTextContent(
-          "text-4",
-          "No one lives in the slums because they want to. It's like this train. It can't run anywhere except where its rails take it."
-        ),
-      ],
-      seconNode
-    );
-    this.dialog = new Dialogue("dialog-1", startNode);
+    this.dialog = convertExportDataToDialogue(json);
   },
   methods: {
     next(nextNode) {
