@@ -1,5 +1,18 @@
 <template>
   <div>
+    <!-- State -->
+    <div style="display:flex">
+      <div>
+        <h2>State, Variables:</h2>
+        <div v-for="variable in variables" :key="variable.id">{{ variable.name }}: {{ variable.currentValue }}</div>
+      </div>
+      <div>
+        <h2>State, Variables:</h2>
+        <div>is_arthut_dead: true</div>
+        <div>is_arthut_dead: true</div>
+      </div>
+    </div>
+
     <!-- FINISH SCREEN -->
     <div v-if="dialog.isFinished">THE END</div>
 
@@ -12,19 +25,12 @@
         </div>
       </div>
       <div v-if="!dialog.finished">
-        <div
-          v-if="dialog.currentNode.options && dialog.currentNode.options.length === 0"
-          class="btn"
-          @click="next(dialog.currentNode.nextNode)"
-        >
+        <div v-if="dialog.currentNode.options && dialog.currentNode.options.length === 0" class="btn"
+          @click="next(dialog.currentNode.nextNode)">
           > Next
         </div>
-        <div
-          class="btn"
-          v-for="(option, index) in dialog.currentNode.options"
-          :key="index"
-          @click="next(option.nextNode)"
-        >
+        <div class="btn" v-for="(option, index) in dialog.currentNode.options" :key="index"
+          @click="next(option.nextNode)">
           > {{ option.text }}
         </div>
       </div>
@@ -60,7 +66,6 @@ export default {
   },
   computed: {
     currentNode() {
-      console.log(this.dialog?.currentNode)
       return this.dialog?.currentNode;
     },
     content() {
@@ -70,6 +75,9 @@ export default {
         return "dd";
       }
     },
+    variables() {
+      return this.dialog.variables
+    }
   },
   created() {
     this.dialog = convertExportDataToDialogue(json);
@@ -87,6 +95,7 @@ export default {
 .btn {
   cursor: pointer;
 }
+
 /* Final Fantasy VII Style from https://codepen.io/Kaizzo/pen/aGWwMM */
 body {
   background-color: black;
@@ -94,6 +103,7 @@ body {
   background-repeat: no-repeat;
   background-position: -150px 0;
 }
+
 div.ff7 {
   border: solid 1px #424542;
   box-shadow: 1px 1px #e7dfe7, -1px -1px #e7dfe7, 1px -1px #e7dfe7,
@@ -103,22 +113,21 @@ div.ff7 {
   margin: 50px 50px;
   background: #04009d;
   background: -moz-linear-gradient(top, #04009d 0%, #06004d 100%);
-  background: -webkit-gradient(
-    linear,
-    left top,
-    left bottom,
-    color-stop(0%, #04009d),
-    color-stop(100%, #06004d)
-  );
+  background: -webkit-gradient(linear,
+      left top,
+      left bottom,
+      color-stop(0%, #04009d),
+      color-stop(100%, #06004d));
   background: -webkit-linear-gradient(top, #04009d 0%, #06004d 100%);
   background: -o-linear-gradient(top, #04009d 0%, #06004d 100%);
   background: -ms-linear-gradient(top, #04009d 0%, #06004d 100%);
   background: linear-gradient(to bottom, #04009d 0%, #06004d 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#04009d', endColorstr='#06004d',GradientType=0 );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#04009d', endColorstr='#06004d', GradientType=0);
   -webkit-border-radius: 7px;
   -moz-border-radius: 7px;
   border-radius: 7px;
 }
+
 div.ff7 * {
   color: #eff1ff;
   text-shadow: 2px 2px #212421, 1px 1px #212021;
