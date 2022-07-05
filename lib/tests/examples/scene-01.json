@@ -1,1 +1,351 @@
-{"type":"@lorehub/export-schema","apiVersion":"1.0.0","resources":[[{"type":"@lorehub/dialogue","apiVersion":"1.0.0","id":"8d874a95-1a95-4101-a868-7b358a286a85","startingNodeId":"2b6490d3-f8a9-440f-93b8-a59e30bbb4c7"},{"type":"@lorehub/variable","apiVersion":"1.0.0","id":"e65dca7e-7408-4a78-94d7-138e69370388","name":"has_golden_key","variableType":"boolean","defaultValue":"false"},{"type":"@lorehub/variable","apiVersion":"1.0.0","id":"d9810e56-2e6d-4262-acb6-4cdbe1e050ed","name":"revenge_arthur","variableType":"boolean","defaultValue":"false"},{"type":"@lorehub/variable","apiVersion":"1.0.0","id":"dbc5b759-4349-465a-87c3-57989f7be1da","name":"is_arthur_dead","variableType":"boolean","defaultValue":"false"},{"type":"@lorehub/document","apiVersion":"1.0.0","id":"27e8396b-6da4-45cb-b42b-02379836df95","name":"Guinevere Pendragon"},{"type":"@lorehub/document","apiVersion":"1.0.0","id":"596ab743-59a9-4678-b8e2-1b655a294dfc","name":"Martin Pendragon"},{"type":"@lorehub/document","apiVersion":"1.0.0","id":"81666f25-2389-4f0e-8f56-38ae87a876a2","name":"Ygraine Pendragon"},{"type":"@lorehub/document","apiVersion":"1.0.0","id":"edc7cd05-a8a6-414b-9458-3bb48b48f5bc","name":"Lars Mosteron"},{"type":"@lorehub/document","apiVersion":"1.0.0","id":"d5a82efd-3fa9-4902-8975-59e5098521dc","name":"Uther Pendragon"},{"type":"@lorehub/document","apiVersion":"1.0.0","id":"66f4892e-6354-4bd9-8d87-a71e5ed7a9ce","name":"Leader Urgos-Shah"},{"type":"@lorehub/document","apiVersion":"1.0.0","id":"c5728561-06a3-4dc5-a647-a951fabdf7e2","name":"King Arthur"},{"type":"@lorehub/document","apiVersion":"1.0.0","id":"62b8f859-82f7-4e28-b57f-b1fa1dc9201b","name":"Beastmen"},{"type":"@lorehub/document","apiVersion":"1.0.0","id":"e31a81bb-0aac-4051-aa16-b485b6fe69a1","name":"Monk Nicolas"},{"type":"@lorehub/meta-schema","apiVersion":"1.0.0","id":"75ca052f-c543-4e8e-9eae-673cb5133e84","name":"background","schemaType":"text"},{"type":"@lorehub/meta-schema","apiVersion":"1.0.0","id":"9f8d8b9c-3947-4fec-9406-85543fafab16","name":"character","schemaType":"text"},{"type":"@lorehub/meta-schema","apiVersion":"1.0.0","id":"d93a908a-182c-4a4d-99bd-e3dbf52efc89","name":"text_speed","schemaType":"integer"},{"type":"@lorehub/dialogue-node","apiVersion":"1.0.0","id":"fcd9d8fd-49d7-483a-81c9-1f3e4df9109a","contentBlockId":"fcd9d8fd-49d7-483a-81c9-1f3e4df9109a","optionsIds":[],"setVariableOnStart":[],"metaData":[{"metaSchemaId":"75ca052f-c543-4e8e-9eae-673cb5133e84","metaSchemaValue":"kings_room_close"},{"metaSchemaId":"9f8d8b9c-3947-4fec-9406-85543fafab16","metaSchemaValue":"ygraine_worried"}]},{"type":"@lorehub/dialogue-node","apiVersion":"1.0.0","id":"06becc2c-69d3-4c40-95b6-341c1dcb6652","contentBlockId":"06becc2c-69d3-4c40-95b6-341c1dcb6652","optionsIds":["f3171000-fce8-4916-a043-133a8c06dfc6","4928f7ce-d469-4818-9335-f2b5e1ee6622"],"setVariableOnStart":[],"metaData":[{"metaSchemaId":"9f8d8b9c-3947-4fec-9406-85543fafab16","metaSchemaValue":"ygraine_angry"},{"metaSchemaId":"75ca052f-c543-4e8e-9eae-673cb5133e84","metaSchemaValue":"kings_room_close"}]},{"type":"@lorehub/dialogue-node","apiVersion":"1.0.0","id":"0b037bf5-c308-4700-b03e-41a6e73d8d72","contentBlockId":"0b037bf5-c308-4700-b03e-41a6e73d8d72","optionsIds":[],"setVariableOnStart":[],"metaData":[{"metaSchemaId":"75ca052f-c543-4e8e-9eae-673cb5133e84","metaSchemaValue":"kings_room_close"},{"metaSchemaId":"9f8d8b9c-3947-4fec-9406-85543fafab16","metaSchemaValue":"ygraine_idle"}]},{"type":"@lorehub/dialogue-node","apiVersion":"1.0.0","id":"de387b98-b262-4427-8e80-6cd9be354765","contentBlockId":"de387b98-b262-4427-8e80-6cd9be354765","optionsIds":[],"setVariableOnStart":[{"variableId":"d9810e56-2e6d-4262-acb6-4cdbe1e050ed","value":"true"}],"metaData":[{"metaSchemaId":"75ca052f-c543-4e8e-9eae-673cb5133e84","metaSchemaValue":"kings_room_close"},{"metaSchemaId":"9f8d8b9c-3947-4fec-9406-85543fafab16","metaSchemaValue":"ygraine_angry"}]},{"type":"@lorehub/dialogue-node","apiVersion":"1.0.0","id":"dd4e5ea3-4b0a-437a-8f26-94e1d4d9e627","contentBlockId":"dd4e5ea3-4b0a-437a-8f26-94e1d4d9e627","optionsIds":[],"setVariableOnStart":[],"metaData":[{"metaSchemaId":"75ca052f-c543-4e8e-9eae-673cb5133e84","metaSchemaValue":"kings_room_close"}]},{"type":"@lorehub/dialogue-node","apiVersion":"1.0.0","id":"2b6490d3-f8a9-440f-93b8-a59e30bbb4c7","contentBlockId":"2b6490d3-f8a9-440f-93b8-a59e30bbb4c7","optionsIds":["dad29f22-d30d-49f0-9cec-c8c06d52182f","36d782e3-46d0-4169-ac5e-521be5a6c283","45b61249-2c90-4068-b1c3-87b3c1fe5d24"],"setVariableOnStart":[],"metaData":[{"metaSchemaId":"75ca052f-c543-4e8e-9eae-673cb5133e84","metaSchemaValue":"kings_room_close"},{"metaSchemaId":"9f8d8b9c-3947-4fec-9406-85543fafab16","metaSchemaValue":"ygraine_worried"}]},{"type":"@lorehub/dialogue-node-option","apiVersion":"1.0.0","id":"f3171000-fce8-4916-a043-133a8c06dfc6","text":"Yes, let's do it","nextDialogId":"de387b98-b262-4427-8e80-6cd9be354765","metaData":[]},{"type":"@lorehub/dialogue-node-option","apiVersion":"1.0.0","id":"4928f7ce-d469-4818-9335-f2b5e1ee6622","text":"No, It is too dangerous","nextDialogId":"dd4e5ea3-4b0a-437a-8f26-94e1d4d9e627","metaData":[]},{"type":"@lorehub/dialogue-node-option","apiVersion":"1.0.0","id":"dad29f22-d30d-49f0-9cec-c8c06d52182f","text":"Beastmen killed Arthur!","nextDialogId":"06becc2c-69d3-4c40-95b6-341c1dcb6652","metaData":[{"variableId":"dbc5b759-4349-465a-87c3-57989f7be1da","value":"true"}]},{"type":"@lorehub/dialogue-node-option","apiVersion":"1.0.0","id":"36d782e3-46d0-4169-ac5e-521be5a6c283","text":"I don't know where he is.","nextDialogId":"fcd9d8fd-49d7-483a-81c9-1f3e4df9109a","metaData":[]},{"type":"@lorehub/dialogue-node-option","apiVersion":"1.0.0","id":"45b61249-2c90-4068-b1c3-87b3c1fe5d24","text":"Yes, he is alive.","nextDialogId":"0b037bf5-c308-4700-b03e-41a6e73d8d72","metaData":[{"variableId":"dbc5b759-4349-465a-87c3-57989f7be1da","value":"false"}]},{"type":"@lorehub/content-block","apiVersion":"1.0.0","id":"fcd9d8fd-49d7-483a-81c9-1f3e4df9109a","content":[{"text":null,"documentId":"81666f25-2389-4f0e-8f56-38ae87a876a2"},{"text":"We need to find him!"}]},{"type":"@lorehub/content-block","apiVersion":"1.0.0","id":"06becc2c-69d3-4c40-95b6-341c1dcb6652","content":[{"text":null,"documentId":"81666f25-2389-4f0e-8f56-38ae87a876a2"},{"text":"Oh no how can it be true! We must revenge!"}]},{"type":"@lorehub/content-block","apiVersion":"1.0.0","id":"0b037bf5-c308-4700-b03e-41a6e73d8d72","content":[{"text":null,"documentId":"81666f25-2389-4f0e-8f56-38ae87a876a2"},{"text":"Good news! talk to Martin about it!"}]},{"type":"@lorehub/content-block","apiVersion":"1.0.0","id":"de387b98-b262-4427-8e80-6cd9be354765","content":[{"text":null,"documentId":"81666f25-2389-4f0e-8f56-38ae87a876a2"},{"text":"We need to gather a team! Go talk to Martin!"}]},{"type":"@lorehub/content-block","apiVersion":"1.0.0","id":"dd4e5ea3-4b0a-437a-8f26-94e1d4d9e627","content":[{"text":null,"documentId":"81666f25-2389-4f0e-8f56-38ae87a876a2"},{"text":"Coward! Leave me!"}]},{"type":"@lorehub/content-block","apiVersion":"1.0.0","id":"2b6490d3-f8a9-440f-93b8-a59e30bbb4c7","content":[{"text":null,"documentId":"81666f25-2389-4f0e-8f56-38ae87a876a2"},{"text":"Have you seen king?"}]}]]}
+{
+  "type": "@lorehub/export-schema",
+  "apiVersion": "1.0.0",
+  "resources": [
+    [
+      {
+        "type": "@lorehub/dialogue",
+        "apiVersion": "1.0.0",
+        "id": "8d874a95-1a95-4101-a868-7b358a286a85",
+        "startingNodeId": "2b6490d3-f8a9-440f-93b8-a59e30bbb4c7"
+      },
+      {
+        "type": "@lorehub/variable",
+        "apiVersion": "1.0.0",
+        "id": "e65dca7e-7408-4a78-94d7-138e69370388",
+        "name": "has_golden_key",
+        "variableType": "boolean",
+        "defaultValue": "false"
+      },
+      {
+        "type": "@lorehub/variable",
+        "apiVersion": "1.0.0",
+        "id": "d9810e56-2e6d-4262-acb6-4cdbe1e050ed",
+        "name": "revenge_arthur",
+        "variableType": "boolean",
+        "defaultValue": "false"
+      },
+      {
+        "type": "@lorehub/variable",
+        "apiVersion": "1.0.0",
+        "id": "dbc5b759-4349-465a-87c3-57989f7be1da",
+        "name": "is_arthur_dead",
+        "variableType": "boolean",
+        "defaultValue": "false"
+      },
+      {
+        "type": "@lorehub/document",
+        "apiVersion": "1.0.0",
+        "id": "27e8396b-6da4-45cb-b42b-02379836df95",
+        "name": "Guinevere Pendragon"
+      },
+      {
+        "type": "@lorehub/document",
+        "apiVersion": "1.0.0",
+        "id": "596ab743-59a9-4678-b8e2-1b655a294dfc",
+        "name": "Martin Pendragon"
+      },
+      {
+        "type": "@lorehub/document",
+        "apiVersion": "1.0.0",
+        "id": "81666f25-2389-4f0e-8f56-38ae87a876a2",
+        "name": "Ygraine Pendragon"
+      },
+      {
+        "type": "@lorehub/document",
+        "apiVersion": "1.0.0",
+        "id": "edc7cd05-a8a6-414b-9458-3bb48b48f5bc",
+        "name": "Lars Mosteron"
+      },
+      {
+        "type": "@lorehub/document",
+        "apiVersion": "1.0.0",
+        "id": "d5a82efd-3fa9-4902-8975-59e5098521dc",
+        "name": "Uther Pendragon"
+      },
+      {
+        "type": "@lorehub/document",
+        "apiVersion": "1.0.0",
+        "id": "66f4892e-6354-4bd9-8d87-a71e5ed7a9ce",
+        "name": "Leader Urgos-Shah"
+      },
+      {
+        "type": "@lorehub/document",
+        "apiVersion": "1.0.0",
+        "id": "c5728561-06a3-4dc5-a647-a951fabdf7e2",
+        "name": "King Arthur"
+      },
+      {
+        "type": "@lorehub/document",
+        "apiVersion": "1.0.0",
+        "id": "62b8f859-82f7-4e28-b57f-b1fa1dc9201b",
+        "name": "Beastmen"
+      },
+      {
+        "type": "@lorehub/document",
+        "apiVersion": "1.0.0",
+        "id": "e31a81bb-0aac-4051-aa16-b485b6fe69a1",
+        "name": "Monk Nicolas"
+      },
+      {
+        "type": "@lorehub/meta-schema",
+        "apiVersion": "1.0.0",
+        "id": "75ca052f-c543-4e8e-9eae-673cb5133e84",
+        "name": "background",
+        "schemaType": "text"
+      },
+      {
+        "type": "@lorehub/meta-schema",
+        "apiVersion": "1.0.0",
+        "id": "9f8d8b9c-3947-4fec-9406-85543fafab16",
+        "name": "character",
+        "schemaType": "text"
+      },
+      {
+        "type": "@lorehub/meta-schema",
+        "apiVersion": "1.0.0",
+        "id": "d93a908a-182c-4a4d-99bd-e3dbf52efc89",
+        "name": "text_speed",
+        "schemaType": "integer"
+      },
+      {
+        "type": "@lorehub/dialogue-node",
+        "apiVersion": "1.0.0",
+        "id": "fcd9d8fd-49d7-483a-81c9-1f3e4df9109a",
+        "contentBlockId": "fcd9d8fd-49d7-483a-81c9-1f3e4df9109a",
+        "optionsIds": [],
+        "setVariableOnStart": [],
+        "metaData": [
+          {
+            "metaSchemaId": "75ca052f-c543-4e8e-9eae-673cb5133e84",
+            "metaSchemaValue": "kings_room_close"
+          },
+          {
+            "metaSchemaId": "9f8d8b9c-3947-4fec-9406-85543fafab16",
+            "metaSchemaValue": "ygraine_worried"
+          }
+        ]
+      },
+      {
+        "type": "@lorehub/dialogue-node",
+        "apiVersion": "1.0.0",
+        "id": "06becc2c-69d3-4c40-95b6-341c1dcb6652",
+        "contentBlockId": "06becc2c-69d3-4c40-95b6-341c1dcb6652",
+        "optionsIds": [
+          "f3171000-fce8-4916-a043-133a8c06dfc6",
+          "4928f7ce-d469-4818-9335-f2b5e1ee6622"
+        ],
+        "setVariableOnStart": [],
+        "metaData": [
+          {
+            "metaSchemaId": "9f8d8b9c-3947-4fec-9406-85543fafab16",
+            "metaSchemaValue": "ygraine_angry"
+          },
+          {
+            "metaSchemaId": "75ca052f-c543-4e8e-9eae-673cb5133e84",
+            "metaSchemaValue": "kings_room_close"
+          }
+        ]
+      },
+      {
+        "type": "@lorehub/dialogue-node",
+        "apiVersion": "1.0.0",
+        "id": "0b037bf5-c308-4700-b03e-41a6e73d8d72",
+        "contentBlockId": "0b037bf5-c308-4700-b03e-41a6e73d8d72",
+        "optionsIds": [],
+        "setVariableOnStart": [],
+        "metaData": [
+          {
+            "metaSchemaId": "75ca052f-c543-4e8e-9eae-673cb5133e84",
+            "metaSchemaValue": "kings_room_close"
+          },
+          {
+            "metaSchemaId": "9f8d8b9c-3947-4fec-9406-85543fafab16",
+            "metaSchemaValue": "ygraine_idle"
+          }
+        ]
+      },
+      {
+        "type": "@lorehub/dialogue-node",
+        "apiVersion": "1.0.0",
+        "id": "de387b98-b262-4427-8e80-6cd9be354765",
+        "contentBlockId": "de387b98-b262-4427-8e80-6cd9be354765",
+        "optionsIds": [],
+        "setVariableOnStart": [
+          {
+            "variableId": "d9810e56-2e6d-4262-acb6-4cdbe1e050ed",
+            "value": "true"
+          }
+        ],
+        "metaData": [
+          {
+            "metaSchemaId": "75ca052f-c543-4e8e-9eae-673cb5133e84",
+            "metaSchemaValue": "kings_room_close"
+          },
+          {
+            "metaSchemaId": "9f8d8b9c-3947-4fec-9406-85543fafab16",
+            "metaSchemaValue": "ygraine_angry"
+          }
+        ]
+      },
+      {
+        "type": "@lorehub/dialogue-node",
+        "apiVersion": "1.0.0",
+        "id": "dd4e5ea3-4b0a-437a-8f26-94e1d4d9e627",
+        "contentBlockId": "dd4e5ea3-4b0a-437a-8f26-94e1d4d9e627",
+        "optionsIds": [],
+        "setVariableOnStart": [],
+        "metaData": [
+          {
+            "metaSchemaId": "75ca052f-c543-4e8e-9eae-673cb5133e84",
+            "metaSchemaValue": "kings_room_close"
+          }
+        ]
+      },
+      {
+        "type": "@lorehub/dialogue-node",
+        "apiVersion": "1.0.0",
+        "id": "2b6490d3-f8a9-440f-93b8-a59e30bbb4c7",
+        "contentBlockId": "2b6490d3-f8a9-440f-93b8-a59e30bbb4c7",
+        "optionsIds": [
+          "dad29f22-d30d-49f0-9cec-c8c06d52182f",
+          "36d782e3-46d0-4169-ac5e-521be5a6c283",
+          "45b61249-2c90-4068-b1c3-87b3c1fe5d24"
+        ],
+        "setVariableOnStart": [],
+        "metaData": [
+          {
+            "metaSchemaId": "75ca052f-c543-4e8e-9eae-673cb5133e84",
+            "metaSchemaValue": "kings_room_close"
+          },
+          {
+            "metaSchemaId": "9f8d8b9c-3947-4fec-9406-85543fafab16",
+            "metaSchemaValue": "ygraine_worried"
+          }
+        ]
+      },
+      {
+        "type": "@lorehub/dialogue-node-option",
+        "apiVersion": "1.0.0",
+        "id": "f3171000-fce8-4916-a043-133a8c06dfc6",
+        "text": "Yes, let's do it",
+        "nextDialogId": "de387b98-b262-4427-8e80-6cd9be354765",
+        "metaData": []
+      },
+      {
+        "type": "@lorehub/dialogue-node-option",
+        "apiVersion": "1.0.0",
+        "id": "4928f7ce-d469-4818-9335-f2b5e1ee6622",
+        "text": "No, It is too dangerous",
+        "nextDialogId": "dd4e5ea3-4b0a-437a-8f26-94e1d4d9e627",
+        "metaData": []
+      },
+      {
+        "type": "@lorehub/dialogue-node-option",
+        "apiVersion": "1.0.0",
+        "id": "dad29f22-d30d-49f0-9cec-c8c06d52182f",
+        "text": "Beastmen killed Arthur!",
+        "nextDialogId": "06becc2c-69d3-4c40-95b6-341c1dcb6652",
+        "metaData": [
+          {
+            "variableId": "dbc5b759-4349-465a-87c3-57989f7be1da",
+            "value": "true"
+          }
+        ]
+      },
+      {
+        "type": "@lorehub/dialogue-node-option",
+        "apiVersion": "1.0.0",
+        "id": "36d782e3-46d0-4169-ac5e-521be5a6c283",
+        "text": "I don't know where he is.",
+        "nextDialogId": "fcd9d8fd-49d7-483a-81c9-1f3e4df9109a",
+        "metaData": []
+      },
+      {
+        "type": "@lorehub/dialogue-node-option",
+        "apiVersion": "1.0.0",
+        "id": "45b61249-2c90-4068-b1c3-87b3c1fe5d24",
+        "text": "Yes, he is alive.",
+        "nextDialogId": "0b037bf5-c308-4700-b03e-41a6e73d8d72",
+        "metaData": [
+          {
+            "variableId": "dbc5b759-4349-465a-87c3-57989f7be1da",
+            "value": "false"
+          }
+        ]
+      },
+      {
+        "type": "@lorehub/content-block",
+        "apiVersion": "1.0.0",
+        "id": "fcd9d8fd-49d7-483a-81c9-1f3e4df9109a",
+        "content": [
+          {
+            "text": null,
+            "documentId": "81666f25-2389-4f0e-8f56-38ae87a876a2"
+          },
+          { "text": "We need to find him!" }
+        ]
+      },
+      {
+        "type": "@lorehub/content-block",
+        "apiVersion": "1.0.0",
+        "id": "06becc2c-69d3-4c40-95b6-341c1dcb6652",
+        "content": [
+          {
+            "text": null,
+            "documentId": "81666f25-2389-4f0e-8f56-38ae87a876a2"
+          },
+          { "text": "Oh no how can it be true! We must revenge!" }
+        ]
+      },
+      {
+        "type": "@lorehub/content-block",
+        "apiVersion": "1.0.0",
+        "id": "0b037bf5-c308-4700-b03e-41a6e73d8d72",
+        "content": [
+          {
+            "text": null,
+            "documentId": "81666f25-2389-4f0e-8f56-38ae87a876a2"
+          },
+          { "text": "Good news! talk to Martin about it!" }
+        ]
+      },
+      {
+        "type": "@lorehub/content-block",
+        "apiVersion": "1.0.0",
+        "id": "de387b98-b262-4427-8e80-6cd9be354765",
+        "content": [
+          {
+            "text": null,
+            "documentId": "81666f25-2389-4f0e-8f56-38ae87a876a2"
+          },
+          { "text": "We need to gather a team! Go talk to Martin!" }
+        ]
+      },
+      {
+        "type": "@lorehub/content-block",
+        "apiVersion": "1.0.0",
+        "id": "dd4e5ea3-4b0a-437a-8f26-94e1d4d9e627",
+        "content": [
+          {
+            "text": null,
+            "documentId": "81666f25-2389-4f0e-8f56-38ae87a876a2"
+          },
+          { "text": "Coward! Leave me!" }
+        ]
+      },
+      {
+        "type": "@lorehub/content-block",
+        "apiVersion": "1.0.0",
+        "id": "2b6490d3-f8a9-440f-93b8-a59e30bbb4c7",
+        "content": [
+          {
+            "text": null,
+            "documentId": "81666f25-2389-4f0e-8f56-38ae87a876a2"
+          },
+          { "text": "Have you seen king?" }
+        ]
+      }
+    ]
+  ]
+}
