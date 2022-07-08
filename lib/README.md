@@ -2,7 +2,7 @@
 
 [Roadmap](https://github.com/lore-hub-app/dialog-player-js/projects/1)
 
-![CI](https://github.com/lore-hub-app/dialog-player-js/actions/workflows/ci.yml/badge.svg)
+[![CI/CD](https://github.com/lore-hub-app/dialogue-player-js/actions/workflows/cicd.yml/badge.svg)](https://github.com/lore-hub-app/dialogue-player-js/actions/workflows/cicd.yml)
 
 ![image](https://user-images.githubusercontent.com/6351780/117262218-df56a880-ae05-11eb-9f16-d59c0fc1f777.png)
 
