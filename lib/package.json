@@ -1,10 +1,10 @@
 {
-  "name": "lorehub-dialog-player",
-  "version": "2.0.1",
+  "name": "@lorehub/dialogue-player",
+  "version": "3.0.0",
   "private": false,
-  "main": "dist/lorehub-dialog-player.js",
+  "main": "dist/lorehub-dialogue-player.js",
   "files": [
-    "dist/lorehub-dialog-player.js",
+    "dist/lorehub-dialogue-player.js",
     "README.md",
     "LICENSE"
   ],
@@ -25,13 +25,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lore-hub-app/dialog-player-js.git"
+    "url": "git+https://github.com/lore-hub-app/dialogue-player-js.git"
   },
   "keywords": [],
   "author": "Andrei Kniazev <worldpwn@hotmail.com>",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/lore-hub-app/dialog-player-js/issues"
+    "url": "https://github.com/lore-hub-app/dialogue-player-js/issues"
   },
-  "homepage": "https://github.com/lore-hub-app/dialog-player-js#readme"
+  "homepage": "https://github.com/lore-hub-app/dialogue-player-js#readme"
 }
