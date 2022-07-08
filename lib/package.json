@@ -1,37 +1,37 @@
 {
-    "name": "lorehub-dialog-player",
-    "version": "2.0.1",
-    "private": false,
-    "main": "dist/lorehub-dialog-player.js",
-    "files": [
-        "dist/lorehub-dialog-player.js",
-        "README.md",
-        "LICENSE"
-    ],
-    "scripts": {
-        "build": "webpack",
-        "test": "jest"
-    },
-    "devDependencies": {
-        "@babel/core": "^7.14.0",
-        "@babel/preset-env": "^7.14.1",
-        "babel-loader": "^8.2.2",
-        "eslint": "^7.32.0",
-        "jest": "^26.6.3",
-        "jest-junit-reporter": "^1.1.0",
-        "terser-webpack-plugin": "^5.1.1",
-        "webpack": "^5.36.2",
-        "webpack-cli": "^4.6.0"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/lore-hub-app/dialog-player-js.git"
-    },
-    "keywords": [],
-    "author": "Andrei Kniazev <worldpwn@hotmail.com>",
-    "license": "Apache-2.0",
-    "bugs": {
-        "url": "https://github.com/lore-hub-app/dialog-player-js/issues"
-    },
-    "homepage": "https://github.com/lore-hub-app/dialog-player-js#readme"
+  "name": "lorehub-dialog-player",
+  "version": "2.0.1",
+  "private": false,
+  "main": "dist/lorehub-dialog-player.js",
+  "files": [
+    "dist/lorehub-dialog-player.js",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "webpack",
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.0",
+    "@babel/preset-env": "^7.14.1",
+    "babel-loader": "^8.2.2",
+    "c8": "^7.11.3",
+    "terser-webpack-plugin": "^5.1.1",
+    "vitest": "^0.17.0",
+    "webpack": "^5.36.2",
+    "webpack-cli": "^4.6.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lore-hub-app/dialog-player-js.git"
+  },
+  "keywords": [],
+  "author": "Andrei Kniazev <worldpwn@hotmail.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/lore-hub-app/dialog-player-js/issues"
+  },
+  "homepage": "https://github.com/lore-hub-app/dialog-player-js#readme"
 }

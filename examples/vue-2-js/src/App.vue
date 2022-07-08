@@ -1,31 +1,36 @@
 <template>
   <div>
+    <!-- State -->
+    <div style="display:flex">
+      <div>
+        <h2>State, Variables:</h2>
+        <div v-for="variable in variables" :key="variable.id">{{ variable.name }}: {{ variable.currentValue }}</div>
+      </div>
+      <!-- <div>
+        <h2>State, Variables:</h2>
+        <div>is_arthut_dead: true</div>
+        <div>is_arthut_dead: true</div>
+      </div> -->
+    </div>
+
     <!-- FINISH SCREEN -->
     <div v-if="dialog.isFinished">THE END</div>
 
     <!-- DIALOG -->
     <div v-else class="ff7">
       <div>
-        <div v-for="(item, index) in content" :key="item.id">
+        <div v-for="(item, index) in content" :key="index">
           <span v-if="index !== 0">&ldquo;</span>{{ item.text
           }}<span v-if="index !== 0">&ldquo;</span>
         </div>
       </div>
       <div v-if="!dialog.finished">
-        <div
-          v-if="dialog.currentNode.options.length === 0"
-          class="btn"
-          @click="next(dialog.currentNode.nextNode)"
-        >
+        <div v-if="dialog.currentNode.options && dialog.currentNode.options.length === 0" class="btn"
+          @click="next(dialog.currentNode)">
           > Next
         </div>
-        <div
-          class="btn"
-          v-for="option in dialog.currentNode.options"
-          :key="option.id"
-          @click="next(option.nextNode)"
-        >
-          > {{ option.text }}
+        <div class="btn" v-for="(option, index) in dialog.currentNode.options" :key="index" @click="next(option)">
+          > {{ option.text }} (disabled: {{ option.isDisabled }})
         </div>
       </div>
     </div>
@@ -40,13 +45,15 @@
 
 <script>
 import {
-  Dialog,
-  DialogNode,
-  DialogNodeOption,
-  DialogTextContent,
-  DialogReferenceContent,
+  Dialogue,
+  DialogueNode,
+  DialogueTextContent,
+  DialogueReferenceContent,
+  DialogueNodeOption,
   GoToNextNode,
-} from "lorehub-dialog-player";
+  convertExportDataToDialogue
+} from "../../../lib/src/index";
+import json from '../../../lib/tests/examples/scene-01'
 
 export default {
   name: "App",
@@ -67,36 +74,16 @@ export default {
         return "dd";
       }
     },
+    variables() {
+      return this.dialog.variables
+    }
   },
   created() {
-    const thirdNode = new DialogNode("node-3", [
-      new DialogTextContent("text-1", "Cloud stops"),
-    ]);
-    const seconNode = new DialogNode(
-      "node-2",
-      [new DialogTextContent("text-1", "Cloud is leaving")],
-      null,
-      [
-        new DialogNodeOption("option-1", "Please, stop!", thirdNode),
-        new DialogNodeOption("option-2", "Bye...", null),
-      ]
-    );
-    const startNode = new DialogNode(
-      "node-1",
-      [
-        new DialogReferenceContent("text-3", null, "doc-1", "Cloud"),
-        new DialogTextContent(
-          "text-4",
-          "No one lives in the slums because they want to. It's like this train. It can't run anywhere except where its rails take it."
-        ),
-      ],
-      seconNode
-    );
-    this.dialog = new Dialog("dialog-1", startNode);
+    this.dialog = convertExportDataToDialogue(json);
   },
   methods: {
-    next(nextNode) {
-      const command = new GoToNextNode(this.dialog, nextNode);
+    next(selected) {
+      const command = new GoToNextNode(this.dialog, selected);
       command.execute();
       this.commands.push(command);
     },
@@ -107,6 +94,7 @@ export default {
 .btn {
   cursor: pointer;
 }
+
 /* Final Fantasy VII Style from https://codepen.io/Kaizzo/pen/aGWwMM */
 body {
   background-color: black;
@@ -114,6 +102,7 @@ body {
   background-repeat: no-repeat;
   background-position: -150px 0;
 }
+
 div.ff7 {
   border: solid 1px #424542;
   box-shadow: 1px 1px #e7dfe7, -1px -1px #e7dfe7, 1px -1px #e7dfe7,
@@ -123,22 +112,21 @@ div.ff7 {
   margin: 50px 50px;
   background: #04009d;
   background: -moz-linear-gradient(top, #04009d 0%, #06004d 100%);
-  background: -webkit-gradient(
-    linear,
-    left top,
-    left bottom,
-    color-stop(0%, #04009d),
-    color-stop(100%, #06004d)
-  );
+  background: -webkit-gradient(linear,
+      left top,
+      left bottom,
+      color-stop(0%, #04009d),
+      color-stop(100%, #06004d));
   background: -webkit-linear-gradient(top, #04009d 0%, #06004d 100%);
   background: -o-linear-gradient(top, #04009d 0%, #06004d 100%);
   background: -ms-linear-gradient(top, #04009d 0%, #06004d 100%);
   background: linear-gradient(to bottom, #04009d 0%, #06004d 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#04009d', endColorstr='#06004d',GradientType=0 );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#04009d', endColorstr='#06004d', GradientType=0);
   -webkit-border-radius: 7px;
   -moz-border-radius: 7px;
   border-radius: 7px;
 }
+
 div.ff7 * {
   color: #eff1ff;
   text-shadow: 2px 2px #212421, 1px 1px #212021;
