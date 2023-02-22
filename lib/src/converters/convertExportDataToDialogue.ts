@@ -7,26 +7,27 @@ import { BooleanVariable } from "../variables/BooleanVariable";
 import { SetVariableOnStart } from "../variables/SerVariableOnStart";
 import { RequiredVariable } from "../variables/RequiredVariable";
 
+
 /**
  * Will convert data from server to a dialogue.
  * @param {string} data JSON dialogue schema https://docs.lorehub.app/export-schema/v1.html
- * @returns {Dialogue}
  */
-export function convertExportDataToDialogue(data) {
+export function convertExportDataToDialogue(data: any): Dialogue {
+
   const resources = data.resources;
   /** https://docs.lorehub.app/dialogue/v1.html */
-  const dialogue = resources.find(d => d.type === '@lorehub/dialogue');
+  const dialogue = resources.find((d: any) => d.type === '@lorehub/dialogue');
   /** https://docs.lorehub.app/dialogue-node/v1.html */
-  const nodes = resources.filter(r => r.type === "@lorehub/dialogue-node");
-  const blocks = resources.filter(r => r.type === '@lorehub/content-block');
+  const nodes = resources.filter((r: any) => r.type === "@lorehub/dialogue-node");
+  const blocks = resources.filter((r: any) => r.type === '@lorehub/content-block');
   /** https://docs.lorehub.app/document/v1.html */
-  const documents = resources.filter(r => r.type === '@lorehub/document');
+  const documents = resources.filter((r: any) => r.type === '@lorehub/document');
   /** https://docs.lorehub.app/dialogue-node/v1.html */
-  const nodeOptions = resources.filter(r => r.type === '@lorehub/dialogue-node-option');
+  const nodeOptions = resources.filter((r: any) => r.type === '@lorehub/dialogue-node-option');
   /** https://docs.lorehub.app/variable/v1.html */
-  const variables = resources.filter(r => r.type === '@lorehub/variable');
+  const variables = resources.filter((r: any) => r.type === '@lorehub/variable');
   /** https://docs.lorehub.app/meta-schema/v1.html */
-  const metaSchema = resources.filter(r => r.type === '@lorehub/meta-schema');
+  const metaSchema = resources.filter((r: any) => r.type === '@lorehub/meta-schema');
 
   const convertedNodes = createDialogueNodes(
     nodes,
@@ -41,38 +42,27 @@ export function convertExportDataToDialogue(data) {
       `Cannot find starting node with id ${dialogue.startingNodeId}.`
     );
   }
-  const convertedVariables = variables.map(v => new BooleanVariable(v.id, v.name, v.defaultValue))
+  const convertedVariables = variables.map((v: any) => new BooleanVariable(v.id, v.name, v.defaultValue))
   const dialog = new Dialogue(dialogue.id, startingNode, convertedVariables);
   return dialog;
 }
 
-/**
- * @param {Array<any>} dialogNodes
- * @param {Array<any>} contentBlocks
- * @param {Array<any>} documents
- * @param {Array<any>} options
- */
-function createDialogueNodes(dialogueNodes, contentBlocks, documents, options) {
-  const nodes = [];
-
+function createDialogueNodes(dialogueNodes: any[], contentBlocks: any[], documents: any[], options: any[]): DialogueNode[] {
+  // TODO: data should be unknown and add validation to each resource
+  const nodes: DialogueNode[] = [];
   for (const node of dialogueNodes) {
     nodes.push(createNode(node, dialogueNodes, contentBlocks, documents, options))
   }
   return nodes;
 }
 
-/**
- * @param {any} node
- * @param {Array<any>} dialogNodes
- * @param {Array<any>} contentBlocks
- * @param {Array<any>} documents
- * @param {Array<any>} options
- * @returns {Dialogue}
- */
-function createNode(node, dialogueNodes, contentBlocks, documents, options) {
+
+function createNode(node: any, dialogueNodes: any[], contentBlocks: any[], documents: any[], options: any[]): DialogueNode {
+  // TODO: data should be unknown and add validation to each resource
+
   // Convert content.
   const contentBlock = contentBlocks.find(c => c.id === node.id);
-  const convertedContent = [];
+  const convertedContent: Array<DialogueTextContent | DialogueReferenceContent> = [];
   for (const content of contentBlock.content) {
     if (content.documentId) {
       const neededDocument = documents.find(d => d.id === content.documentId);
@@ -92,7 +82,7 @@ function createNode(node, dialogueNodes, contentBlocks, documents, options) {
     if (nextNodeData) {
       nextNode = createNode(nextNodeData, dialogueNodes, contentBlocks, documents, options);
     }
-    const requiredVariables = neededOption.requiredVariables ? neededOption.requiredVariables.map(v => new RequiredVariable(v.variableId, v.value)) : [];
+    const requiredVariables = neededOption.requiredVariables ? neededOption.requiredVariables.map((v: any) => new RequiredVariable(v.variableId, v.value)) : [];
     convertedOptions.push(new DialogueNodeOption(neededOption.id, neededOption.text, nextNode, requiredVariables))
   }
   const nextNodeData = dialogueNodes.find(n => n.id === node.nextDialogueNodeId);
@@ -100,6 +90,6 @@ function createNode(node, dialogueNodes, contentBlocks, documents, options) {
   if (nextNodeData) {
     nextNode = createNode(nextNodeData, dialogueNodes, contentBlocks, documents, options);
   }
-  const setVariableOnStart = node.setVariableOnStart ? node.setVariableOnStart.map(n => new SetVariableOnStart(n.variableId, n.value)) : [];
+  const setVariableOnStart = node.setVariableOnStart ? node.setVariableOnStart.map((n: any) => new SetVariableOnStart(n.variableId, n.value)) : [];
   return new DialogueNode(node.id, convertedContent, nextNode, convertedOptions, setVariableOnStart);
 }

@@ -1,11 +1,13 @@
 import { DialogueNodeOption } from "../options/DialogueNodeOption";
 import { DialogueNode } from '../nodes/DialogueNode';
 import { Command } from "./Command";
+import { Dialogue } from "../Dialogue";
 
-export class GoToNextNode extends Command {
+export class GoToNextNode implements Command {
 
-  constructor(dialog, selected) {
-    super();
+  constructor(
+    public readonly dialog: Dialogue,
+    public readonly selected: DialogueNode) {
     this.dialog = dialog;
     this.selected = selected;
   }
