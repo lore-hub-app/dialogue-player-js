@@ -7,9 +7,11 @@
     "allowJs": true,
     "declaration": true,
     "composite": true,
-    "target": "ES6",
+    "target": "ES5",
     "moduleResolution": "node",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "module": "commonjs",
+    "esModuleInterop": true
   },
   "include": [
     "src"
