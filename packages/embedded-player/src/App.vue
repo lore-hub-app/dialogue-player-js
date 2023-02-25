@@ -32,23 +32,26 @@
             </div>
           </v-row>
 
-          <v-row class="options-section">
-            <template v-if="!dialogue.isFinished && dialogue.currentNode">
-              <v-btn v-if="dialogue.currentNode.options.length === 0" @click="next(dialogue.currentNode as DialogueNode)">
-                <v-icon>mdi-numeric-1-box</v-icon>Next
-              </v-btn>
-              <v-col cols="12" v-for="(option, index) in dialogue.currentNode.options" :key="option.id.fullValue">
-                <v-btn @click="next(option as DialogueNodeOption)" :dark="option.isDisabled"
-                  :disabled="option.isDisabled">
-                  <v-icon>mdi-numeric-{{ index + 1 }}-box</v-icon> {{ option.text }}
+          <v-row class=" justify-center">
+            <div class="options-section">
+              <template v-if="!dialogue.isFinished && dialogue.currentNode">
+                <v-btn v-if="dialogue.currentNode.options.length === 0"
+                  @click="next(dialogue.currentNode as DialogueNode)">
+                  <v-icon>mdi-numeric-1-box</v-icon>Next
                 </v-btn>
-                <span v-for="requiredVar in option.requiredVariables" class="ml-4" :key="requiredVar.variableId">
-                  Required: <b>{{ getVariableName(requiredVar) }}</b> to be <b>{{ requiredVar.value }}</b>
-                </span>
-              </v-col>
-            </template>
-            <div v-else class="pa-2 text-center white--text" style="width:100%">
-              <h2>FIN</h2>
+                <v-col cols="12" v-for="(option, index) in dialogue.currentNode.options" :key="option.id.fullValue">
+                  <v-btn @click="next(option as DialogueNodeOption)" :dark="option.isDisabled"
+                    :disabled="option.isDisabled">
+                    <v-icon>mdi-numeric-{{ index + 1 }}-box</v-icon> {{ option.text }}
+                  </v-btn>
+                  <span v-for="requiredVar in option.requiredVariables" class="ml-4" :key="requiredVar.variableId">
+                    Required: <b>{{ getVariableName(requiredVar) }}</b> to be <b>{{ requiredVar.value }}</b>
+                  </span>
+                </v-col>
+              </template>
+              <div v-else class="pa-2 text-center white--text" style="width:100%">
+                <h2>FIN</h2>
+              </div>
             </div>
           </v-row>
         </template>
