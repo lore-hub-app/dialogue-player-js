@@ -4,17 +4,18 @@ export class FullId {
     if (fullValue == null) throw Error('Cannot create full id if value is null');
   }
 
-  /// <summary>
-  /// Will Return Id of the Entity itself.
-  /// </summary>
+  /** 
+   * Will Return Id of the Entity itself.
+   */
   get id(): string {
     const split = this.fullValue.split('/');
+    console.log(split)
     return split[split.length - 1];
   }
 
-  /// <summary>
-  /// Will return Entity Type, ex: DialogNode, NodeOption
-  /// </summary>
+  /**
+   * Will return Entity Type, ex: DialogNode, NodeOption
+   */
   public getEntityType(): 'dialogue' | 'dialogue-node' | 'dialogue-link' | 'dialogue-node-option' {
     const split = this.fullValue.split('/');
     const typeStr = split[split.length - 2];

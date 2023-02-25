@@ -6,6 +6,10 @@ import { DialogueNodeOption } from '../options/DialogueNodeOption';
 import { BooleanVariable } from "../variables/BooleanVariable";
 import { SetVariableOnStart } from "../variables/SerVariableOnStart";
 import { RequiredVariable } from "../variables/RequiredVariable";
+import { IDialogue } from "../schema/IDialogue";
+import { IContentBlock, isContentBlockReference } from "../schema/IContentBlock";
+import { IDialogueNode } from "../schema/IDialogueNode";
+import { FullId } from "../primitives/FullId";
 
 
 /**
@@ -14,12 +18,13 @@ import { RequiredVariable } from "../variables/RequiredVariable";
  */
 export function convertExportDataToDialogue(data: any): Dialogue {
 
+  // TODO: data should be unknown and add validation to each resource
   const resources = data.resources;
   /** https://docs.lorehub.app/dialogue/v1.html */
-  const dialogue = resources.find((d: any) => d.type === '@lorehub/dialogue');
+  const dialogue: IDialogue = resources.find((d: any) => d.type === '@lorehub/dialogue') as IDialogue;
   /** https://docs.lorehub.app/dialogue-node/v1.html */
-  const nodes = resources.filter((r: any) => r.type === "@lorehub/dialogue-node");
-  const blocks = resources.filter((r: any) => r.type === '@lorehub/content-block');
+  const nodes: IDialogueNode[] = resources.filter((r: any) => r.type === "@lorehub/dialogue-node") as IDialogueNode[];
+  const blocks: IContentBlock[] = resources.filter((r: any) => r.type === '@lorehub/content-block') as IContentBlock[];
   /** https://docs.lorehub.app/document/v1.html */
   const documents = resources.filter((r: any) => r.type === '@lorehub/document');
   /** https://docs.lorehub.app/dialogue-node/v1.html */
@@ -47,7 +52,7 @@ export function convertExportDataToDialogue(data: any): Dialogue {
   return dialog;
 }
 
-function createDialogueNodes(dialogueNodes: any[], contentBlocks: any[], documents: any[], options: any[]): DialogueNode[] {
+function createDialogueNodes(dialogueNodes: IDialogueNode[], contentBlocks: IContentBlock[], documents: any[], options: any[]): DialogueNode[] {
   // TODO: data should be unknown and add validation to each resource
   const nodes: DialogueNode[] = [];
   for (const node of dialogueNodes) {
@@ -57,17 +62,15 @@ function createDialogueNodes(dialogueNodes: any[], contentBlocks: any[], documen
 }
 
 
-function createNode(node: DialogueNode, dialogueNodes: any[], contentBlocks: any[], documents: any[], options: any[]): DialogueNode {
-  // TODO: data should be unknown and add validation to each resource
+function createNode(node: IDialogueNode, dialogueNodes: IDialogueNode[], contentBlocks: IContentBlock[], documents: any[], options: any[]): DialogueNode {
 
   // Convert content.
-  const contentBlock = contentBlocks.find(c => c.id === node.id);
-  console.log(node);
-  console.log(contentBlocks);
-  console.log(contentBlock);
+  const nodeFullId = new FullId(node.id);
+  const contentBlock = contentBlocks.find((c: IContentBlock) => c.id === nodeFullId.id);
+  if (contentBlock == null) throw new Error(`Cannot create node because Content Block is null ${nodeFullId.id}`);
   const convertedContent: Array<DialogueTextContent | DialogueReferenceContent> = [];
   for (const content of contentBlock.content) {
-    if (content.documentId) {
+    if (isContentBlockReference(content)) {
       const neededDocument = documents.find(d => d.id === content.documentId);
       convertedContent.push(new DialogueReferenceContent(contentBlock.id, content.text, content.documentId, neededDocument.name));
     }
