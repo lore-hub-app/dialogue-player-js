@@ -1,26 +1,27 @@
 <template>
   <v-app>
     <v-main>
-      <div class="dialog-player">
-        <v-row class="justify-center mb-6">
+      <div class="dialog-player pa-12">
+        <v-row class="justify-center">
           <v-btn class="ml-4" @click="restartDialogue">
             Restart
           </v-btn>
         </v-row>
 
-        <v-row class="variables-and-metadata-section">
-          <div>
-            <h2>Current variables values:</h2>
+        <v-row class="variables-and-metadata-section justify-center">
+          <v-col>
+            <h3>Current variables values</h3>
             <div v-for="variable in dialogue.variables" :key="variable.id">
               {{ variable.name }}: {{ variable.currentValue }}
             </div>
-          </div>
-          <div>
-            <h2>Node's meta data:</h2>
+          </v-col>
+
+          <v-col>
+            <h3>Node's meta data</h3>
             <div v-for="(metaData, index) in dialogue.currentNode?.metaData" :key="index">
               {{ getMetaDataName(metaData) }}: {{ metaData.metaSchemaValue }}
             </div>
-          </div>
+          </v-col>
         </v-row>
         <template v-if="dialogue">
           <v-row v-if="!dialogue.isFinished" class="justify-center mb-6">
@@ -57,7 +58,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onBeforeUnmount } from 'vue';
 import {
   convertExportDataToDialogue,
   Dialogue,
@@ -92,5 +93,47 @@ function getMetaDataName(metaData: MetaData) {
   const metaSchema = dialogue.value.metaSchema.find(s => s.id == metaData.metaSchemaId);
   return metaSchema?.name;
 }
+
+window.addEventListener('keyup', (event) => keyboardPress(event));
+
+onBeforeUnmount(() => {
+  window.removeEventListener('keyup', (event) => keyboardPress(event))
+})
+
+function keyboardPress(event: KeyboardEvent) {
+  if (event.code.substring(0, event.code.length - 1) === 'Digit') {
+    const number = +event.key
+    if (isNaN(number)) return;
+    if (dialogue.value.currentNode?.options.length === 0 && number === 1) {
+      // press next button
+      next(dialogue.value.currentNode as DialogueNode)
+    }
+    const tryToFindOption = dialogue.value.currentNode?.options[number - 1]
+    if (tryToFindOption == null) return;
+    // check if can click
+    if (tryToFindOption.isDisabled) return;
+    // press option
+    next(tryToFindOption as DialogueNodeOption)
+  }
+}
 </script>
 
+<style>
+.dialog-player {
+  color: white;
+}
+
+.dialog-card {
+  background-color: white;
+  color: black;
+  padding: 18px;
+  width: 700px;
+  border-radius: 8px;
+  font-size: 1.2em;
+}
+
+.options-section {
+  width: 700px;
+  margin: auto;
+}
+</style>
