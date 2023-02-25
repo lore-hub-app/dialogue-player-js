@@ -1,5 +1,6 @@
 
 import { DialogueNode } from './nodes/DialogueNode'
+import { FullId } from './primitives/FullId';
 import { BooleanVariable } from './variables/BooleanVariable';
 import { SetVariableOnStart } from './variables/SerVariableOnStart';
 
@@ -7,12 +8,12 @@ export class Dialogue {
 
   public nodes: DialogueNode[] = [];
   public currentNode: DialogueNode | null;
-
+  public readonly id: FullId;
   constructor(
-    public readonly id: string,
+    id: string,
     public readonly startNode: DialogueNode,
     public readonly variables: BooleanVariable[]) {
-
+    this.id = new FullId(id);
     this.currentNode = startNode;
     applyOptionStatus(this.variables, this.currentNode)
   }

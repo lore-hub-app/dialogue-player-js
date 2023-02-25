@@ -10,6 +10,7 @@ import { IDialogue } from "../schema/IDialogue";
 import { IContentBlock, isContentBlockReference } from "../schema/IContentBlock";
 import { IDialogueNode } from "../schema/IDialogueNode";
 import { FullId } from "../primitives/FullId";
+import { ILink } from "../schema/ILink";
 
 
 /**
@@ -33,7 +34,7 @@ export function convertExportDataToDialogue(data: any): Dialogue {
   const variables = resources.filter((r: any) => r.type === '@lorehub/variable');
   /** https://docs.lorehub.app/meta-schema/v1.html */
   const metaSchema = resources.filter((r: any) => r.type === '@lorehub/meta-schema');
-
+  const links = resources.filter((r: any) => r.type === '@lorehub/dialogue-link') as ILink[];
   const convertedNodes = createDialogueNodes(
     nodes,
     blocks,
@@ -41,14 +42,19 @@ export function convertExportDataToDialogue(data: any): Dialogue {
     nodeOptions
   );
 
-  const startingNode = convertedNodes.find((n: DialogueNode) => n.id === dialogue.startingNodeId);
-  if (startingNode == null) {
-    throw new Error(
-      `Cannot find starting node with id ${dialogue.startingNodeId}.`
-    );
+  const linkFromDialogue = links.find((l: ILink) => l.from === dialogue.id);
+  if (linkFromDialogue == null) {
+    throw new Error(`Cannot start dialogue because there is no link from dialogue`);
   }
+
+  const startingNode = convertedNodes.find(n => n.id.fullValue === linkFromDialogue.to);
+  if (startingNode == null) {
+    throw new Error(`Cannot find starting node with id ${linkFromDialogue.to}.`);
+  }
+
   const convertedVariables = variables.map((v: any) => new BooleanVariable(v.id, v.name, v.defaultValue))
   const dialog = new Dialogue(dialogue.id, startingNode, convertedVariables);
+  console.log(dialog);
   return dialog;
 }
 

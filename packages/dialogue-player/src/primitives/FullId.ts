@@ -9,7 +9,6 @@ export class FullId {
    */
   get id(): string {
     const split = this.fullValue.split('/');
-    console.log(split)
     return split[split.length - 1];
   }
 
@@ -47,3 +46,9 @@ export class FullId {
     throw new Error(`not implemented for ${this.getEntityType()}`);
   }
 }
+
+
+export type FullIdDialogue = `dialogue/${string}`;
+export type FullIdDialogueNode = `dialogue/${string}/dialogue-node/${string}`;
+export type FullIdDialogueNodeOption = `dialogue/${string}/dialogue-node/${string}/dialogue-node-option/${string}`;
+export type FullIdDialogueLink = `dialogue/${string}/dialogue-link/${string}`;
