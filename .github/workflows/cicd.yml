@@ -16,12 +16,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v3
-      - run: npm ci
-        working-directory: lib
-      - run: npm run test
-        working-directory: lib
-      - run: npm run build
-        working-directory: lib
+      - run: pnpm ci
+      - run: pnpm dialogue-player lint
+      - rin: pnpm embedded-player lint
+      - run: pnpm dialogue-player test
+      - rin: pnpm embedded-player test
+      - run: pnpm dialogue-player build
+      - rin: pnpm embedded-player build
       - uses: actions/upload-artifact@v2
         with:
           name: dialog-player-js
