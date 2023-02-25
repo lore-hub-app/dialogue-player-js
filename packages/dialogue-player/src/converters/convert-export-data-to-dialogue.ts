@@ -11,29 +11,33 @@ import { IContentBlock, isContentBlockReference } from "../schema/IContentBlock"
 import { IDialogueNode } from "../schema/IDialogueNode";
 import { FullId } from "../primitives/FullId";
 import { ILink } from "../schema/ILink";
+import { IDocument } from "../schema/IDocument";
+import { IDialogueNodeOption } from "../schema/IDialogueNodeOption";
 
 
 /**
  * Will convert data from server to a dialogue.
- * @param {string} data JSON dialogue schema https://docs.lorehub.app/export-schema/v1.html
+ * @param {string} data JSON dialogue schema https://lorehub.app/documentation/dialogue-schema-api/export-schema-v2
  */
 export function convertExportDataToDialogue(data: any): Dialogue {
 
   // TODO: data should be unknown and add validation to each resource
   const resources = data.resources;
-  /** https://docs.lorehub.app/dialogue/v1.html */
+  /** https://lorehub.app/documentation/dialogue-schema-api/dialogue-v2 */
   const dialogue: IDialogue = resources.find((d: any) => d.type === '@lorehub/dialogue') as IDialogue;
-  /** https://docs.lorehub.app/dialogue-node/v1.html */
+  /** https://lorehub.app/documentation/dialogue-schema-api/dialogue-node-v2 */
   const nodes: IDialogueNode[] = resources.filter((r: any) => r.type === "@lorehub/dialogue-node") as IDialogueNode[];
+  /* https://lorehub.app/documentation/dialogue-schema-api/content-block-v1 */
   const blocks: IContentBlock[] = resources.filter((r: any) => r.type === '@lorehub/content-block') as IContentBlock[];
-  /** https://docs.lorehub.app/document/v1.html */
-  const documents = resources.filter((r: any) => r.type === '@lorehub/document');
-  /** https://docs.lorehub.app/dialogue-node/v1.html */
-  const nodeOptions = resources.filter((r: any) => r.type === '@lorehub/dialogue-node-option');
-  /** https://docs.lorehub.app/variable/v1.html */
+  /** https://lorehub.app/documentation/dialogue-schema-api/document-v1 */
+  const documents: IDocument[] = resources.filter((r: any) => r.type === '@lorehub/document') as IDocument[];
+  /** https://lorehub.app/documentation/dialogue-schema-api/dialogue-node-option-v2 */
+  const nodeOptions = resources.filter((r: any) => r.type === '@lorehub/dialogue-node-option') as IDialogueNodeOption[];
+  /** https://lorehub.app/documentation/dialogue-schema-api/variable-v1 */
   const variables = resources.filter((r: any) => r.type === '@lorehub/variable');
-  /** https://docs.lorehub.app/meta-schema/v1.html */
+  /** https://lorehub.app/documentation/dialogue-schema-api/meta-schema-v1 */
   const metaSchema = resources.filter((r: any) => r.type === '@lorehub/meta-schema');
+  /** https://lorehub.app/documentation/dialogue-schema-api/link-v1 */
   const links = resources.filter((r: any) => r.type === '@lorehub/dialogue-link') as ILink[];
   const convertedNodes = createDialogueNodes(
     nodes,
@@ -58,7 +62,7 @@ export function convertExportDataToDialogue(data: any): Dialogue {
   return dialog;
 }
 
-function createDialogueNodes(dialogueNodes: IDialogueNode[], contentBlocks: IContentBlock[], documents: any[], options: any[]): DialogueNode[] {
+function createDialogueNodes(dialogueNodes: IDialogueNode[], contentBlocks: IContentBlock[], documents: IDocument[], options: IDialogueNodeOption[]): DialogueNode[] {
   // TODO: data should be unknown and add validation to each resource
   const nodes: DialogueNode[] = [];
   for (const node of dialogueNodes) {
@@ -68,7 +72,7 @@ function createDialogueNodes(dialogueNodes: IDialogueNode[], contentBlocks: ICon
 }
 
 
-function createNode(node: IDialogueNode, dialogueNodes: IDialogueNode[], contentBlocks: IContentBlock[], documents: any[], options: any[]): DialogueNode {
+function createNode(node: IDialogueNode, dialogueNodes: IDialogueNode[], contentBlocks: IContentBlock[], documents: IDocument[], options: IDialogueNodeOption[]): DialogueNode {
 
   // Convert content.
   const nodeFullId = new FullId(node.id);
