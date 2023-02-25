@@ -59,8 +59,36 @@ export function convertExportDataToDialogue(data: any): Dialogue {
     throw new Error(`Cannot find starting node with id ${linkFromDialogue.to}.`);
   }
 
+  // link all
+  for (const link of links) {
+    const fullFromId = new FullId(link.from);
+    const fullToId = new FullId(link.to);
+    if (fullToId.getEntityType() !== 'dialogue-node') {
+      throw new Error(`Link can lead only to type dialogue-node but it leads to ${fullToId.getEntityType()}`);
+    }
+    // links from dialogue-node to dialogue-node
+    if (fullFromId.getEntityType() === 'dialogue-node') {
+      const nodeFrom = convertedNodes.find(n => n.id.equal(fullFromId));
+      if (nodeFrom == null) throw new Error(`Cannot find node ${fullFromId.fullValue}`);
+      const nodeTo = convertedNodes.find(n => n.id.equal(fullToId));
+      if (nodeTo == null) throw new Error(`Cannot find node ${fullToId.fullValue}`);
+      nodeFrom.setNextNode(nodeTo);
+    }
+    // links from dialogue-node-options to dialogue-node
+    if (fullFromId.getEntityType() === 'dialogue-node-option') {
+      const optionsNode = convertedNodes.find(n => n.id.equal(fullFromId.getParentFullId()));
+      if (optionsNode == null) throw new Error(`Cannot find option's node with id ${fullFromId.getParentFullId()}`);
+      const optionFrom = optionsNode.options.find(o => o.id.equal(fullFromId));
+      if (optionFrom == null) throw new Error(`Cannot find option ${fullFromId.fullValue}`);
+      const nodeTo = convertedNodes.find(n => n.id.equal(fullToId));
+      if (nodeTo == null) throw new Error(`Cannot find node ${fullToId.fullValue}`);
+      optionFrom.setNextNode(nodeTo);
+    }
+  }
+
   const convertedVariables = variables.map((v: any) => new BooleanVariable(v.id, v.name, v.defaultValue))
   const dialog = new Dialogue(dialogue.id, startingNode, convertedVariables);
+
   console.log(dialog);
   return dialog;
 }
