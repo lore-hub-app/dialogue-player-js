@@ -1,0 +1,10 @@
+{
+  "private": true,
+  "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "dialogue-player": "pnpm run --filter @lorehub/dialogue-player",
+    "embedded-player": "pnpm run --filter embedded-player",
+    "example": "pnpm run --filter example"
+  },
+  "packageManager": "pnpm@7.22.0"
+}

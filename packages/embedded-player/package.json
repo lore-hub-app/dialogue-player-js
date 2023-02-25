@@ -1,0 +1,30 @@
+{
+  "name": "embedded-player",
+  "version": "1.0.0",
+  "private": false,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "test": "vitest run",
+    "lint": "eslint . --ext .js,.ts"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lore-hub-app/dialogue-player-js.git"
+  },
+  "keywords": [],
+  "author": "Andrei Kniazev <worldpwn@hotmail.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/lore-hub-app/dialogue-player-js/issues"
+  },
+  "homepage": "https://github.com/lore-hub-app/dialogue-player-js#readme"
+}

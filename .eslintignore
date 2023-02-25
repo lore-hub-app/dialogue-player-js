@@ -1,9 +1,4 @@
-.DS_Store
 node_modules
-
 packages/dialogue-player/dist
 packages/embedded-player/dist
 packages/example/dist
-
-**/tsconfig.tsbuildinfo
-**/tsconfig.prod.tsbuildinfo
