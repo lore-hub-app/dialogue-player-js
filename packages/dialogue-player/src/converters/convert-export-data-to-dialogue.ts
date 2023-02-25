@@ -89,7 +89,6 @@ export function convertExportDataToDialogue(data: any): Dialogue {
   const convertedVariables = variables.map((v: any) => new BooleanVariable(v.id, v.name, v.defaultValue))
   const dialog = new Dialogue(dialogue.id, startingNode, convertedVariables);
 
-  console.log(dialog);
   return dialog;
 }
 
