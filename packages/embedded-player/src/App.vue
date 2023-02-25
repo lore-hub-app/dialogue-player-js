@@ -10,7 +10,7 @@
             </v-btn>
           </v-row>
           <v-row v-if="error" class="justify-center mb-6">
-            <server-error :error="error" />
+            {{ error }}
           </v-row>
 
           <v-row class="variables-and-metadata-section">
@@ -63,12 +63,23 @@
 
 <script setup lang="ts">
 import { Ref, ref } from 'vue';
-import { BooleanVariable, Dialogue, DialogueReferenceContent, DialogueTextContent } from "@lorehub/dialogue-player"
+import {
+  BooleanVariable,
+  DialogueReferenceContent,
+  DialogueTextContent,
+  convertExportDataToDialogue
+} from "@lorehub/dialogue-player"
+import jsonDialogue from '@/assets/example-dialogue-json.json';
+
+console.log(jsonDialogue)
 
 const error = ref({});
+
+const dialogueFromJson = convertExportDataToDialogue(jsonDialogue);
+
 const variables: Ref<BooleanVariable[]> = ref([]);
 const metaDataForNode: Ref<any[]> = ref([]);
-const dialogue: Ref<Dialogue> = ref({});
+const dialogue = ref(dialogueFromJson);
 const content: Ref<(DialogueTextContent | DialogueReferenceContent)[]> = ref([]);
 
 
