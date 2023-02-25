@@ -57,11 +57,14 @@ function createDialogueNodes(dialogueNodes: any[], contentBlocks: any[], documen
 }
 
 
-function createNode(node: any, dialogueNodes: any[], contentBlocks: any[], documents: any[], options: any[]): DialogueNode {
+function createNode(node: DialogueNode, dialogueNodes: any[], contentBlocks: any[], documents: any[], options: any[]): DialogueNode {
   // TODO: data should be unknown and add validation to each resource
 
   // Convert content.
   const contentBlock = contentBlocks.find(c => c.id === node.id);
+  console.log(node);
+  console.log(contentBlocks);
+  console.log(contentBlock);
   const convertedContent: Array<DialogueTextContent | DialogueReferenceContent> = [];
   for (const content of contentBlock.content) {
     if (content.documentId) {

@@ -9,9 +9,6 @@
               {{ $t("EDITOR.dialogs.restart") }}
             </v-btn>
           </v-row>
-          <v-row v-if="error" class="justify-center mb-6">
-            {{ error }}
-          </v-row>
 
           <v-row class="variables-and-metadata-section">
             <div>
@@ -71,9 +68,7 @@ import {
 } from "@lorehub/dialogue-player"
 import jsonDialogue from '@/assets/example-dialogue-json.json';
 
-console.log(jsonDialogue)
-
-const error = ref({});
+console.log(jsonDialogue);
 
 const dialogueFromJson = convertExportDataToDialogue(jsonDialogue);
 
