@@ -1,0 +1,16 @@
+{
+  "navigationFallback": {
+    "rewrite": "index.html",
+    "exclude": [
+      "env-config.js",
+      "site.webmanifest",
+      "*.{png,jpg,gif,ico}",
+      "/css/*",
+      "/js/*",
+      "/fonts/*"
+    ]
+  },
+  "mimeTypes": {
+    ".json": "text/json"
+  }
+}
