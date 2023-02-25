@@ -31,7 +31,7 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: dialog-player-js
-          path: lib/dist
+          path: packages/dialogue-player/dist
           if-no-files-found: error
 
   deploy:
