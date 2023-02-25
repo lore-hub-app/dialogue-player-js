@@ -7,9 +7,9 @@ export class DialogueNode {
   public nextNode: DialogueNode | null = null;
   constructor(
     id: string,
-    public readonly content: Array<DialogueTextContent | DialogueReferenceContent>,
-    public options: Array<DialogueNodeOption> = [],
-    public readonly setVariableOnStart: Array<SetVariableOnStart> = []) {
+    public readonly content: (DialogueTextContent | DialogueReferenceContent)[],
+    public options: DialogueNodeOption[] = [],
+    public readonly setVariableOnStart: SetVariableOnStart[] = []) {
     this.id = new FullId(id);
   }
 

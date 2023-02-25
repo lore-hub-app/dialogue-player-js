@@ -7,7 +7,7 @@ export class GoToNextNode implements Command {
 
   constructor(
     public readonly dialog: Dialogue,
-    public readonly selected: DialogueNode) {
+    public readonly selected: DialogueNode | DialogueNodeOption) {
     this.dialog = dialog;
     this.selected = selected;
   }

@@ -3,7 +3,7 @@
     <v-main>
       <div class="dialog-player">
         <v-row class="justify-center mb-6">
-          <v-btn class="ml-4" @click="initDialogue">
+          <v-btn class="ml-4" @click="restartDialogue">
             Restart
           </v-btn>
         </v-row>
@@ -58,12 +58,12 @@
 import { Ref, ref } from 'vue';
 import {
   BooleanVariable,
-  DialogueReferenceContent,
-  DialogueTextContent,
   convertExportDataToDialogue,
+  Dialogue,
   DialogueNode,
   DialogueNodeOption,
-  RequiredVariable
+  GoToNextNode,
+  RequiredVariable,
 } from "@lorehub/dialogue-player"
 import jsonDialogue from '@/assets/example-dialogue-json.json';
 
@@ -73,19 +73,22 @@ const dialogue = ref(dialogueFromJson);
 
 const variables: Ref<BooleanVariable[]> = ref([]);
 const metaDataForNode: Ref<any[]> = ref([]);
-const content: Ref<(DialogueTextContent | DialogueReferenceContent)[]> = ref([]);
 
+const content = ref(dialogue.value.currentNode?.content ?? []);
 
-function initDialogue() {
-
+function restartDialogue() {
+  const dialogueFromJson = convertExportDataToDialogue(jsonDialogue);
+  dialogue.value = dialogueFromJson;
 }
 
 function next(selected: DialogueNode | DialogueNodeOption) {
-  console.log('selected', selected);
+  const command = new GoToNextNode(dialogue.value as Dialogue, selected);
+  command.execute();
 }
 
 function getVariableName(requiredVar: RequiredVariable) {
-
+  const variable = dialogue.value.variables.find(v => v.id == requiredVar.variableId);
+  return variable?.name;
 }
 </script>
 
