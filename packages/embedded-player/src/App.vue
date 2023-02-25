@@ -27,23 +27,24 @@
             <v-row v-if="!dialogue.isFinished" class="justify-center mb-6">
               <div class="dialog-card">
                 <div v-for="(item, index) in content" :key="index">
-                  <span class="font-weight-medium" v-if="item.documentId">{{ item.text }}:</span>
-                  <span v-else> {{ item.text }}</span>
+                  <span> {{ item.text }}</span>
                 </div>
               </div>
             </v-row>
 
             <v-row class="options-section">
-              <template v-if="!dialogue.isFinished">
-                <v-btn v-if="dialogue.currentNode.options.length === 0" @click="next(dialogue.currentNode)">
+              <template v-if="!dialogue.isFinished && dialogue.currentNode">
+                <v-btn v-if="dialogue.currentNode.options.length === 0"
+                  @click="next(dialogue.currentNode as DialogueNode)">
                   <v-icon>mdi-numeric-1-box</v-icon>{{ $t("EDITOR.dialogs.next") }}
                 </v-btn>
-                <v-col cols="12" v-for="(option, index) in dialogue.currentNode.options" :key="option.id">
-                  <v-btn :key="option.id" @click="next(option)" :dark="option.isDisabled" :disabled="option.isDisabled">
+                <v-col cols="12" v-for="(option, index) in dialogue.currentNode.options" :key="option.id.fullValue">
+                  <v-btn @click="next(option as DialogueNodeOption)" :dark="option.isDisabled"
+                    :disabled="option.isDisabled">
                     <v-icon>mdi-numeric-{{ index + 1 }}-box</v-icon> {{ option.text }}
                   </v-btn>
-                  <span v-for="requiredVar in option.requiredVariables" class="ml-4">
-                    Required: <b>{{ getVariableName(requiredVar.variableId) }}</b> to be <b>{{ requiredVar.value }}</b>
+                  <span v-for="requiredVar in option.requiredVariables" class="ml-4" :key="requiredVar.variableId">
+                    Required: <b>{{ getVariableName(requiredVar) }}</b> to be <b>{{ requiredVar.value }}</b>
                   </span>
                 </v-col>
               </template>
@@ -64,7 +65,10 @@ import {
   BooleanVariable,
   DialogueReferenceContent,
   DialogueTextContent,
-  convertExportDataToDialogue
+  convertExportDataToDialogue,
+  DialogueNode,
+  DialogueNodeOption,
+  RequiredVariable
 } from "@lorehub/dialogue-player"
 import jsonDialogue from '@/assets/example-dialogue-json.json';
 
@@ -79,6 +83,14 @@ const content: Ref<(DialogueTextContent | DialogueReferenceContent)[]> = ref([])
 
 
 function initDialogue() {
+
+}
+
+function next(selected: DialogueNode | DialogueNodeOption) {
+  console.log('selected', selected);
+}
+
+function getVariableName(requiredVar: RequiredVariable) {
 
 }
 </script>
