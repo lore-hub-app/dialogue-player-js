@@ -15,15 +15,15 @@
           </div>
           <div>
             <h2>Node's meta data:</h2>
-            <div v-for="(metaData, index) in metaDataForNode" :key="index">{{ metaData.name }}: {{
-              metaData.metaSchemaValue
-            }}</div>
+            <div v-for="(metaData, index) in metaDataForNode" :key="index">
+              {{ metaData.name }}: {{ metaData.metaSchemaValue }}
+            </div>
           </div>
         </v-row>
         <template v-if="dialogue">
           <v-row v-if="!dialogue.isFinished" class="justify-center mb-6">
             <div class="dialog-card">
-              <div v-for="(item, index) in content" :key="index">
+              <div v-for="(item, index) in dialogue.currentNode?.content" :key="index">
                 <span> {{ item.text }}</span>
               </div>
             </div>
@@ -73,8 +73,6 @@ const dialogue = ref(dialogueFromJson);
 
 const variables: Ref<BooleanVariable[]> = ref([]);
 const metaDataForNode: Ref<any[]> = ref([]);
-
-const content = ref(dialogue.value.currentNode?.content ?? []);
 
 function restartDialogue() {
   const dialogueFromJson = convertExportDataToDialogue(jsonDialogue);
