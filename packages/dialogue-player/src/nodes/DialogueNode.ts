@@ -1,6 +1,7 @@
 import { DialogueNodeOption, DialogueTextContent, DialogueReferenceContent } from "..";
 import { SetVariableOnStart } from "../variables/SerVariableOnStart";
 import { FullId } from "../primitives/FullId";
+import { MetaData } from "../meta-data/MetaData";
 export class DialogueNode {
 
   public readonly id: FullId;
@@ -8,8 +9,10 @@ export class DialogueNode {
   constructor(
     id: string,
     public readonly content: (DialogueTextContent | DialogueReferenceContent)[],
-    public options: DialogueNodeOption[] = [],
-    public readonly setVariableOnStart: SetVariableOnStart[] = []) {
+    public options: DialogueNodeOption[],
+    public readonly setVariableOnStart: SetVariableOnStart[],
+    public readonly metaData: MetaData[]
+  ) {
     this.id = new FullId(id);
   }
 

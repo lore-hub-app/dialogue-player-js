@@ -1,4 +1,5 @@
 
+import { MetaSchema } from './meta-data/MetaSchema';
 import { DialogueNode } from './nodes/DialogueNode'
 import { FullId } from './primitives/FullId';
 import { BooleanVariable } from './variables/BooleanVariable';
@@ -12,7 +13,8 @@ export class Dialogue {
   constructor(
     id: string,
     public readonly startNode: DialogueNode,
-    public readonly variables: BooleanVariable[]) {
+    public readonly variables: BooleanVariable[],
+    public readonly metaSchema: MetaSchema[]) {
     this.id = new FullId(id);
     this.currentNode = startNode;
     applyOptionStatus(this.variables, this.currentNode)

@@ -15,6 +15,8 @@ import { IDocument } from "../schema/IDocument";
 import { IDialogueNodeOption } from "../schema/IDialogueNodeOption";
 import { IVariable } from "../schema/IVariable";
 import { IMetaSchema } from "../schema/IMetaSchema";
+import { MetaSchema } from "../meta-data/MetaSchema";
+import { MetaData } from "../meta-data/MetaData";
 
 
 /**
@@ -86,8 +88,9 @@ export function convertExportDataToDialogue(data: any): Dialogue {
     }
   }
 
-  const convertedVariables = variables.map((v: any) => new BooleanVariable(v.id, v.name, v.defaultValue))
-  const dialog = new Dialogue(dialogue.id, startingNode, convertedVariables);
+  const convertedVariables = variables.map(v => new BooleanVariable(v.id, v.name, v.defaultValue))
+  const convertedMetaSchema = metaSchema.map(v => new MetaSchema(v.id, v.name, v.schemaType));
+  const dialog = new Dialogue(dialogue.id, startingNode, convertedVariables, convertedMetaSchema);
 
   return dialog;
 }
@@ -96,13 +99,13 @@ function createDialogueNodes(dialogueNodes: IDialogueNode[], contentBlocks: ICon
   // TODO: data should be unknown and add validation to each resource
   const nodes: DialogueNode[] = [];
   for (const node of dialogueNodes) {
-    nodes.push(createNode(node, dialogueNodes, contentBlocks, documents, options))
+    nodes.push(createNode(node, contentBlocks, documents, options))
   }
   return nodes;
 }
 
 
-function createNode(node: IDialogueNode, dialogueNodes: IDialogueNode[], contentBlocks: IContentBlock[], documents: IDocument[], options: IDialogueNodeOption[]): DialogueNode {
+function createNode(node: IDialogueNode, contentBlocks: IContentBlock[], documents: IDocument[], options: IDialogueNodeOption[]): DialogueNode {
 
   // Convert content.
   const nodeFullId = new FullId(node.id);
@@ -133,5 +136,6 @@ function createNode(node: IDialogueNode, dialogueNodes: IDialogueNode[], content
     convertedOptions.push(new DialogueNodeOption(neededOption.id, neededOption.text, requiredVariables))
   }
   const setVariableOnStart = node.setVariableOnStart ? node.setVariableOnStart.map(v => new SetVariableOnStart(v.variableId, v.value)) : [];
-  return new DialogueNode(node.id, convertedContent, convertedOptions, setVariableOnStart);
+  const convertedMetaData = node.metaData.map(d => new MetaData(d.metaSchemaId, d.metaSchemaValue));
+  return new DialogueNode(node.id, convertedContent, convertedOptions, setVariableOnStart, convertedMetaData);
 }

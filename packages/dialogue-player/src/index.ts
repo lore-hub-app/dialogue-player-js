@@ -7,3 +7,4 @@ export { DialogueNodeOption } from './options/DialogueNodeOption'
 export { GoToNextNode } from './commands/GoToNextNode';
 export { BooleanVariable } from './variables/BooleanVariable';
 export { RequiredVariable } from './variables/RequiredVariable';
+export { MetaData } from './meta-data/MetaData';

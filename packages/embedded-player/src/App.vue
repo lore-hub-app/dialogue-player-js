@@ -11,12 +11,14 @@
         <v-row class="variables-and-metadata-section">
           <div>
             <h2>Current variables values:</h2>
-            <div v-for="variable in variables" :key="variable.id">{{ variable.name }}: {{ variable.currentValue }}</div>
+            <div v-for="variable in dialogue.variables" :key="variable.id">
+              {{ variable.name }}: {{ variable.currentValue }}
+            </div>
           </div>
           <div>
             <h2>Node's meta data:</h2>
-            <div v-for="(metaData, index) in metaDataForNode" :key="index">
-              {{ metaData.name }}: {{ metaData.metaSchemaValue }}
+            <div v-for="(metaData, index) in dialogue.currentNode?.metaData" :key="index">
+              {{ getMetaDataName(metaData) }}: {{ metaData.metaSchemaValue }}
             </div>
           </div>
         </v-row>
@@ -55,14 +57,14 @@
 </template>
 
 <script setup lang="ts">
-import { Ref, ref } from 'vue';
+import { ref } from 'vue';
 import {
-  BooleanVariable,
   convertExportDataToDialogue,
   Dialogue,
   DialogueNode,
   DialogueNodeOption,
   GoToNextNode,
+  MetaData,
   RequiredVariable,
 } from "@lorehub/dialogue-player"
 import jsonDialogue from '@/assets/example-dialogue-json.json';
@@ -70,9 +72,6 @@ import jsonDialogue from '@/assets/example-dialogue-json.json';
 
 const dialogueFromJson = convertExportDataToDialogue(jsonDialogue);
 const dialogue = ref(dialogueFromJson);
-
-const variables: Ref<BooleanVariable[]> = ref([]);
-const metaDataForNode: Ref<any[]> = ref([]);
 
 function restartDialogue() {
   const dialogueFromJson = convertExportDataToDialogue(jsonDialogue);
@@ -87,6 +86,11 @@ function next(selected: DialogueNode | DialogueNodeOption) {
 function getVariableName(requiredVar: RequiredVariable) {
   const variable = dialogue.value.variables.find(v => v.id == requiredVar.variableId);
   return variable?.name;
+}
+
+function getMetaDataName(metaData: MetaData) {
+  const metaSchema = dialogue.value.metaSchema.find(s => s.id == metaData.metaSchemaId);
+  return metaSchema?.name;
 }
 </script>
 
