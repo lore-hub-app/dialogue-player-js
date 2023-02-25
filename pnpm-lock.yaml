@@ -33,6 +33,7 @@ importers:
 
   packages/embedded-player:
     specifiers:
+      '@lorehub/dialogue-player': '*'
       '@mdi/font': 7.0.96
       '@types/node': ^18.11.9
       '@types/webfontloader': ^1.6.35
@@ -50,6 +51,7 @@ importers:
       vuetify: ^3.0.0
       webfontloader: ^1.0.0
     dependencies:
+      '@lorehub/dialogue-player': link:../dialogue-player
       '@mdi/font': 7.0.96
       roboto-fontface: 0.10.0
       vue: 3.2.47
