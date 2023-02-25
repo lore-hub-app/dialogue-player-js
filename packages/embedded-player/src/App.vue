@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <v-main>
+      <p> {{ $t("restartDialogue") }}</p>
       <HelloWorld />
     </v-main>
   </v-app>

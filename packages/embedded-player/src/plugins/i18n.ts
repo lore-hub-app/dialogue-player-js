@@ -1,7 +1,19 @@
 import { createI18n } from 'vue-i18n'
 
+const messages = {
+  en: {
+    restartDialogue: 'hello world'
+  },
+  ja: {
+    restartDialogue: 'こんにちは、世界'
+  }
+}
+
+
 export const i18n = createI18n({
-  // something vue-i18n options here ...
+  locale: 'ja',
+  fallbackLocale: 'en',
+  messages,
 })
 
 
