@@ -1,5 +1,6 @@
 import { Dialogue, DialogueNode, DialogueTextContent } from "../src";
 import { describe, it, expect } from 'vitest';
+import { FullId } from "../src/primitives/FullId";
 
 const testContent = new DialogueTextContent(
   "9BEB03C5-867C-4355-AEBD-D3A64C82FFAA",
@@ -12,15 +13,17 @@ describe("Dialogue.ctor", () => {
     const startNode = new DialogueNode(
       "8C3D3BCD-BCE3-49C4-8F52-9586FE1A31B9",
       [testContent],
-      null
+      [],
+      [],
+      []
     );
-    const id = "E4DBD07B-2FE7-4C3A-80A8-523BE7B957A6";
+    const id = new FullId("E4DBD07B-2FE7-4C3A-80A8-523BE7B957A6");
 
     // act
-    const dialog = new Dialogue(id, startNode, []);
+    const dialog = new Dialogue(id.fullValue, startNode, [], []);
 
     // assert
-    expect(dialog.id).toBe(id);
+    expect(dialog.id.equal(id)).toBe(true);
     expect(dialog.startNode).toBe(startNode);
   });
 });
@@ -31,12 +34,14 @@ describe("Dialogue.currentNode", () => {
     const startNode = new DialogueNode(
       "8C3D3BCD-BCE3-49C4-8F52-9586FE1A31B9",
       [testContent],
-      null
+      [],
+      [],
+      []
     );
     const id = "E4DBD07B-2FE7-4C3A-80A8-523BE7B957A6";
 
     // act
-    const dialog = new Dialogue(id, startNode, []);
+    const dialog = new Dialogue(id, startNode, [], []);
 
     // assert
     expect(dialog.currentNode).toBe(startNode);

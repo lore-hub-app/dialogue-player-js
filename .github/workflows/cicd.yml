@@ -20,7 +20,7 @@ jobs:
           node-version: "16.17.1"
       - uses: pnpm/action-setup@v2
         with:
-          version: 7.22.0  
+          version: 7.28.0  
       - run: pnpm install
       - run: pnpm dialogue-player lint
       - run: pnpm embedded-player lint
