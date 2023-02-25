@@ -4,19 +4,15 @@ import { BooleanVariable } from './variables/BooleanVariable';
 import { SetVariableOnStart } from './variables/SerVariableOnStart';
 
 export class Dialogue {
-  /**
-  * @param {String} id
-  * @param {DialogueNode} startNode
-  * @param {BooleanVariable} variables
-  */
-  constructor(id, startNode, variables) {
-    dialogGuard(id, startNode);
 
-    this.id = id;
-    /** @type DialogueNode */
-    this.startNode = startNode;
-    this.nodes = [];
-    this.variables = variables;
+  public nodes: DialogueNode[] = [];
+  public currentNode: DialogueNode | null;
+
+  constructor(
+    public readonly id: string,
+    public readonly startNode: DialogueNode,
+    public readonly variables: BooleanVariable[]) {
+
     this.currentNode = startNode;
     applyOptionStatus(this.variables, this.currentNode)
   }
@@ -25,18 +21,13 @@ export class Dialogue {
     return this.currentNode == null;
   }
 
-  /**
-   * @param {SetVariableOnStart} setVariable 
-   */
-  setVariable(setVariable) {
+  setVariable(setVariable: SetVariableOnStart) {
     const needed = this.variables.find(v => v.id === setVariable.variableId);
+    if (needed == null) throw new Error("Cannot set variable because it is null");
     needed.changeCurrentValue(setVariable.value);
   }
 
-  /**
-   * @param {DialogueNode | null} node 
-   */
-  setCurrentNode(node) {
+  setCurrentNode(node: DialogueNode | null) {
     this.currentNode = node;
     if (node == null) return;
     // apply variables on next node start
@@ -45,10 +36,8 @@ export class Dialogue {
     }
     applyOptionStatus(this.variables, node)
   }
-  /**
-    * @param {DialogueNode} node 
-    */
-  addNode(node) {
+
+  addNode(node: DialogueNode) {
     if (node instanceof DialogueNode) {
       this.nodes.push(node);
     }
@@ -58,23 +47,11 @@ export class Dialogue {
   }
 }
 
-function dialogGuard(id, startNode) {
-  if (id == null || startNode == null) {
-    throw new Error(
-      "Cannot create Dialogue because id or/and startNode is null."
-    );
-  }
-}
-
-/**
- * 
- * @param {BooleanVariable[]} variables 
- * @param {DialogueNode} node 
- */
-function applyOptionStatus(variables, node) {
+function applyOptionStatus(variables: BooleanVariable[], node: DialogueNode) {
   for (const option of node.options) {
     for (const reqVariable of option.requiredVariables) {
       const checkVar = variables.find(v => v.id === reqVariable.variableId);
+      if (checkVar == null) throw new Error("Cannot apply options status because variable to check is null");
       if (reqVariable.value !== checkVar.currentValue) {
         option.isDisabled = true;
       }

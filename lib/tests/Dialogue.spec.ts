@@ -11,13 +11,13 @@ describe("Dialogue.ctor", () => {
     // arrange
     const startNode = new DialogueNode(
       "8C3D3BCD-BCE3-49C4-8F52-9586FE1A31B9",
-      testContent,
+      [testContent],
       null
     );
     const id = "E4DBD07B-2FE7-4C3A-80A8-523BE7B957A6";
 
     // act
-    const dialog = new Dialogue(id, startNode);
+    const dialog = new Dialogue(id, startNode, []);
 
     // assert
     expect(dialog.id).toBe(id);
@@ -30,13 +30,13 @@ describe("Dialogue.currentNode", () => {
     // arrange
     const startNode = new DialogueNode(
       "8C3D3BCD-BCE3-49C4-8F52-9586FE1A31B9",
-      testContent,
+      [testContent],
       null
     );
     const id = "E4DBD07B-2FE7-4C3A-80A8-523BE7B957A6";
 
     // act
-    const dialog = new Dialogue(id, startNode);
+    const dialog = new Dialogue(id, startNode, []);
 
     // assert
     expect(dialog.currentNode).toBe(startNode);

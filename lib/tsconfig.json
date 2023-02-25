@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+    "removeComments": false,
+    "strict": true,
+    "allowJs": true,
+    "declaration": true,
+    "composite": true,
+    "target": "ES5",
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "module": "commonjs",
+    "esModuleInterop": true
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}

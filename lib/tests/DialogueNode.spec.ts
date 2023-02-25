@@ -24,14 +24,10 @@ describe("DialogNode.ctor", () => {
   it("correct data and next node is not null, should create", () => {
     // arrange
     const id = "8C3D3BCD-BCE3-49C4-8F52-9586FE1A31B9";
-    const nextNode = new DialogueNode(
-      "77EB32BA-3560-4D93-B322-983A26AF51A9",
-      testContent,
-      null
-    );
+    const nextNode = new DialogueNode("77EB32BA-3560-4D93-B322-983A26AF51A9", [testContent], null);
 
     // act
-    const node = new DialogueNode(id, testContent, nextNode);
+    const node = new DialogueNode(id, [testContent], nextNode);
 
     // assert
     expect(node.id).toBe(id);

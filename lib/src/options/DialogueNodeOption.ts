@@ -1,14 +1,14 @@
+import { DialogueNode } from "../nodes/DialogueNode";
 import { RequiredVariable } from "../variables/RequiredVariable";
 import { SetVariableOnStart } from "../variables/SerVariableOnStart";
 
 export class DialogueNodeOption {
-  /**
-   * @param {String} id
-   * @param {String} text
-   * @param {DialogueNode|null} nextNode
-   * @param {RequiredVariable[]} requiredVariables
-   */
-  constructor(id, text, nextNode = null, requiredVariables = []) {
+  public isDisabled = false;
+  constructor(
+    public readonly id: string,
+    public readonly text: string,
+    public nextNode: DialogueNode | null = null,
+    public readonly requiredVariables: RequiredVariable[] = []) {
     if (id == null || text == null) {
       throw new Error(
         `Cannot create DialogNodeOption because id: ${id} or text: ${text} is null.`
@@ -21,11 +21,7 @@ export class DialogueNodeOption {
     this.isDisabled = false;
   }
 
-  /**
-   * @param {DialogueNode|null} nextNode
-   */
-  setNextNode(nextNode = null) {
+  setNextNode(nextNode: DialogueNode | null = null) {
     this.nextNode = nextNode;
   }
-
 }
