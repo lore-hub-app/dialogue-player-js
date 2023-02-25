@@ -36,7 +36,7 @@ export function convertExportDataToDialogue(data: any): Dialogue {
     nodeOptions
   );
 
-  const startingNode = convertedNodes.find(n => n.id === dialogue.startingNodeId);
+  const startingNode = convertedNodes.find((n: DialogueNode) => n.id === dialogue.startingNodeId);
   if (startingNode == null) {
     throw new Error(
       `Cannot find starting node with id ${dialogue.startingNodeId}.`
