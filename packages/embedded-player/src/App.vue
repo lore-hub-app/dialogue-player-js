@@ -22,6 +22,12 @@
               {{ getMetaDataName(metaData) }}: {{ metaData.metaSchemaValue }}
             </div>
           </v-col>
+          <v-col>
+            <h3>This node set variables on start</h3>
+            <div v-for="(variable, index) in dialogue.currentNode?.setVariableOnStart" :key="index">
+              {{ getVariableName(variable.variableId) }}: {{ variable.value }}
+            </div>
+          </v-col>
         </v-row>
         <template v-if="dialogue">
           <v-row v-if="!dialogue.isFinished" class="justify-center mb-6">
@@ -45,7 +51,7 @@
                     <v-icon>mdi-numeric-{{ index + 1 }}-box</v-icon> {{ option.text }}
                   </v-btn>
                   <span v-for="requiredVar in option.requiredVariables" class="ml-4" :key="requiredVar.variableId">
-                    Required: <b>{{ getVariableName(requiredVar) }}</b> to be <b>{{ requiredVar.value }}</b>
+                    Required: <b>{{ getVariableName(requiredVar.variableId) }}</b> to be <b>{{ requiredVar.value }}</b>
                   </span>
                 </v-col>
               </template>
@@ -87,8 +93,8 @@ function next(selected: DialogueNode | DialogueNodeOption) {
   command.execute();
 }
 
-function getVariableName(requiredVar: RequiredVariable) {
-  const variable = dialogue.value.variables.find(v => v.id == requiredVar.variableId);
+function getVariableName(variableId: string) {
+  const variable = dialogue.value.variables.find(v => v.id == variableId);
   return variable?.name;
 }
 
