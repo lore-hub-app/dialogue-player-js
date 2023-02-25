@@ -4,11 +4,10 @@ import { FullId } from "../primitives/FullId";
 export class DialogueNode {
 
   public readonly id: FullId;
-
+  public nextNode: DialogueNode | null = null;
   constructor(
     id: string,
     public readonly content: Array<DialogueTextContent | DialogueReferenceContent>,
-    public nextNode: DialogueNode | null = null,
     public options: Array<DialogueNodeOption> = [],
     public readonly setVariableOnStart: Array<SetVariableOnStart> = []) {
     this.id = new FullId(id);

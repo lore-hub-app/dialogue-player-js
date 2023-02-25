@@ -1,22 +1,24 @@
 import { DialogueNode } from "../nodes/DialogueNode";
+import { FullId } from "../primitives/FullId";
 import { RequiredVariable } from "../variables/RequiredVariable";
 import { SetVariableOnStart } from "../variables/SerVariableOnStart";
 
 export class DialogueNodeOption {
+  public readonly id: FullId;
+
   public isDisabled = false;
+  public nextNode: DialogueNode | null = null;
   constructor(
-    public readonly id: string,
+    id: string,
     public readonly text: string,
-    public nextNode: DialogueNode | null = null,
     public readonly requiredVariables: RequiredVariable[] = []) {
+
     if (id == null || text == null) {
-      throw new Error(
-        `Cannot create DialogNodeOption because id: ${id} or text: ${text} is null.`
-      );
+      throw new Error(`Cannot create DialogNodeOption because id: ${id} or text: ${text} is null.`);
     }
-    this.id = id;
+
+    this.id = new FullId(id);
     this.text = text;
-    this.nextNode = nextNode;
     this.requiredVariables = requiredVariables;
     this.isDisabled = false;
   }
