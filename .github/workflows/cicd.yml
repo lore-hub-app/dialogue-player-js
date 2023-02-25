@@ -14,9 +14,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
-      - run: pnpm ci
+        with:
+          node-version: "16.17.1"
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 7.22.0  
+      - run: pnpm install
       - run: pnpm dialogue-player lint
       - rin: pnpm embedded-player lint
       - run: pnpm dialogue-player test
