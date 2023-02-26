@@ -1,0 +1,46 @@
+name: CD Embedded Player
+
+on:
+  push:
+    branches: [main]
+
+  workflow_dispatch:
+
+env:
+  DIST_FOLDER: lorehub-shared-dialogue-player
+
+jobs:
+  ci:
+    name: CI, Lint, Unit Tests and Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16.17.1"
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 7.28.0   
+      - run: pnpm install
+      - run: pnpm lorehub-shared-dialogue-player build
+      - uses: actions/upload-artifact@v2
+        with:
+          name: ${{ env.DIST_FOLDER }}
+          path: packages/embedded-player/dist
+          if-no-files-found: error
+
+  deploy:
+    name: Deploy to Azure Static WebApp
+    needs: ci
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: ${{ env.DIST_FOLDER }}
+          path: ${{ env.DIST_FOLDER }}
+      - uses: Azure/static-web-apps-deploy@v1
+        with:
+          skip_app_build: true
+          app_location: ${{ env.DIST_FOLDER }}
+          action: upload
+          azure_static_web_apps_api_token: ${{ secrets.SHARED_PLAYER_DEPLOYMENT_TOKEN }}
