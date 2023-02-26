@@ -2,4 +2,5 @@ packages:
   - 'packages/dialogue-player/'
   - 'packages/embedded-player/'
   - 'packages/example/'
+  - 'packages/lorehub-shared-dialogue-player/'
 

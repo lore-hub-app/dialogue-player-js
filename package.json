@@ -5,6 +5,7 @@
     "dialogue-player": "pnpm run --filter @lorehub/dialogue-player",
     "embedded-player": "pnpm run --filter embedded-player",
     "example": "pnpm run --filter example",
+    "lorehub-shared-dialogue-player": "pnpm run --filter lorehub-shared-dialogue-player",
     "run-example": "pnpm embedded-player dev & pnpm example dev"
   },
   "packageManager": "pnpm@7.28.0"
