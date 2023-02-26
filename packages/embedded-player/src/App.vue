@@ -67,7 +67,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onBeforeUnmount } from 'vue';
+import { ref, onBeforeUnmount, onMounted } from 'vue';
 import {
   convertExportDataToDialogue,
   Dialogue,
@@ -79,6 +79,13 @@ import {
 } from "@lorehub/dialogue-player"
 import jsonDialogue from '@/assets/example-dialogue-json.json';
 
+
+window.addEventListener("message", (event) => loadJsonFromParent(event));
+
+function loadJsonFromParent(event: MessageEvent<any>) {
+  const asJson = JSON.parse(event.data);
+  console.log(asJson);
+}
 
 const dialogueFromJson = convertExportDataToDialogue(jsonDialogue);
 const dialogue = ref(dialogueFromJson);
