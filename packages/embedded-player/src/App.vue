@@ -1,155 +1,30 @@
 <template>
   <v-app>
     <v-main>
-      <div class="dialog-player pa-12">
-        <v-row class="justify-center">
-          <v-btn class="ml-4" @click="restartDialogue">
-            Restart
-          </v-btn>
-        </v-row>
-
-        <v-row class="variables-and-metadata-section justify-center">
-          <v-col>
-            <h3>Current variables values</h3>
-            <div v-for="variable in dialogue.variables" :key="variable.id">
-              {{ variable.name }}: {{ variable.currentValue }}
-            </div>
-          </v-col>
-
-          <v-col>
-            <h3>Node's meta data</h3>
-            <div v-for="(metaData, index) in dialogue.currentNode?.metaData" :key="index">
-              {{ getMetaDataName(metaData) }}: {{ metaData.metaSchemaValue }}
-            </div>
-          </v-col>
-          <v-col>
-            <h3>This node set variables on start</h3>
-            <div v-for="(variable, index) in dialogue.currentNode?.setVariableOnStart" :key="index">
-              {{ getVariableName(variable.variableId) }}: {{ variable.value }}
-            </div>
-          </v-col>
-        </v-row>
-        <template v-if="dialogue">
-          <v-row v-if="!dialogue.isFinished" class="justify-center mb-6">
-            <div class="dialog-card">
-              <div v-for="(item, index) in dialogue.currentNode?.content" :key="index">
-                <span> {{ item.text }}</span>
-              </div>
-            </div>
-          </v-row>
-
-          <v-row class=" justify-center">
-            <div class="options-section">
-              <template v-if="!dialogue.isFinished && dialogue.currentNode">
-                <v-btn v-if="dialogue.currentNode.options.length === 0"
-                  @click="next(dialogue.currentNode as DialogueNode)">
-                  <v-icon>mdi-numeric-1-box</v-icon>Next
-                </v-btn>
-                <v-col cols="12" v-for="(option, index) in dialogue.currentNode.options" :key="option.id.fullValue">
-                  <v-btn @click="next(option as DialogueNodeOption)" :dark="option.isDisabled"
-                    :disabled="option.isDisabled">
-                    <v-icon>mdi-numeric-{{ index + 1 }}-box</v-icon> {{ option.text }}
-                  </v-btn>
-                  <span v-for="requiredVar in option.requiredVariables" class="ml-4" :key="requiredVar.variableId">
-                    Required: <b>{{ getVariableName(requiredVar.variableId) }}</b> to be <b>{{ requiredVar.value }}</b>
-                  </span>
-                </v-col>
-              </template>
-              <div v-else class="pa-2 text-center white--text" style="width:100%">
-                <h2>FIN</h2>
-              </div>
-            </div>
-          </v-row>
-        </template>
+      <DialoguePlayer v-if="jsonDialogue" :json="jsonDialogue" />
+      <div v-else class="pa-8">
+        <p>
+          Dialogue is not loaded.
+        </p>
       </div>
     </v-main>
   </v-app>
 </template>
 
 <script setup lang="ts">
-import { ref, onBeforeUnmount, onMounted } from 'vue';
-import {
-  convertExportDataToDialogue,
-  Dialogue,
-  DialogueNode,
-  DialogueNodeOption,
-  GoToNextNode,
-  MetaData,
-  RequiredVariable,
-} from "@lorehub/dialogue-player"
-import jsonDialogue from '@/assets/example-dialogue-json.json';
-
+import { ref, onBeforeUnmount, onMounted, Ref } from 'vue';
+// import jsonDialogue from '@/assets/example-dialogue-json.json';
+import DialoguePlayer from './components/DialoguePlayer.vue';
 
 window.addEventListener("message", (event) => loadJsonFromParent(event));
 
+const jsonDialogue = ref(null)
+
 function loadJsonFromParent(event: MessageEvent<any>) {
   const asJson = JSON.parse(event.data);
-  console.log(asJson);
-}
-
-const dialogueFromJson = convertExportDataToDialogue(jsonDialogue);
-const dialogue = ref(dialogueFromJson);
-
-function restartDialogue() {
-  const dialogueFromJson = convertExportDataToDialogue(jsonDialogue);
-  dialogue.value = dialogueFromJson;
-}
-
-function next(selected: DialogueNode | DialogueNodeOption) {
-  const command = new GoToNextNode(dialogue.value as Dialogue, selected);
-  command.execute();
-}
-
-function getVariableName(variableId: string) {
-  const variable = dialogue.value.variables.find(v => v.id == variableId);
-  return variable?.name;
-}
-
-function getMetaDataName(metaData: MetaData) {
-  const metaSchema = dialogue.value.metaSchema.find(s => s.id == metaData.metaSchemaId);
-  return metaSchema?.name;
-}
-
-window.addEventListener('keyup', (event) => keyboardPress(event));
-
-onBeforeUnmount(() => {
-  window.removeEventListener('keyup', (event) => keyboardPress(event))
-})
-
-function keyboardPress(event: KeyboardEvent) {
-  if (event.code.substring(0, event.code.length - 1) === 'Digit') {
-    const number = +event.key
-    if (isNaN(number)) return;
-    if (dialogue.value.currentNode?.options.length === 0 && number === 1) {
-      // press next button
-      next(dialogue.value.currentNode as DialogueNode)
-    }
-    const tryToFindOption = dialogue.value.currentNode?.options[number - 1]
-    if (tryToFindOption == null) return;
-    // check if can click
-    if (tryToFindOption.isDisabled) return;
-    // press option
-    next(tryToFindOption as DialogueNodeOption)
-  }
+  jsonDialogue.value = asJson;
 }
 </script>
 
 <style>
-.dialog-player {
-  color: white;
-}
-
-.dialog-card {
-  background-color: white;
-  color: black;
-  padding: 18px;
-  width: 700px;
-  border-radius: 8px;
-  font-size: 1.2em;
-}
-
-.options-section {
-  width: 700px;
-  margin: auto;
-}
 </style>
