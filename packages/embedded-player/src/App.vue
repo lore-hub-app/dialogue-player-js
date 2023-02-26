@@ -21,6 +21,7 @@ window.addEventListener("message", (event) => loadJsonFromParent(event));
 const jsonDialogue = ref(null)
 
 function loadJsonFromParent(event: MessageEvent<any>) {
+  console.log('Received JSON', event.data);
   const asJson = JSON.parse(event.data);
   jsonDialogue.value = asJson;
 }
