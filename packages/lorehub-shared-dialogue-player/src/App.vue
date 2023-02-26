@@ -23,7 +23,7 @@ onMounted(() => {
     asObject[split[0]] = split[1];
   }
   const baseUrl = 'https://lorehub-webapi-as-westeurope-p.azurewebsites.net';
-  axios.get(`${baseUrl}/api/Export/ExportSharedDialogue/${asObject.worldId}/${asObject.storyId}/${asObject.dialogueId}/${asObject.code}`)
+  axios.get(`${baseUrl}/api/v2/Export/ExportSharedDialogue/${asObject.worldId}/${asObject.storyId}/${asObject.dialogueId}/${asObject.code}`)
     .then(r => {
       window.setTimeout(() => {
         initDialogue(r);
