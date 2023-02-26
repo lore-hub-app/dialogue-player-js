@@ -1,4 +1,4 @@
-name: CD Embedded Player
+name: CD Shared Player
 
 on:
   push:
