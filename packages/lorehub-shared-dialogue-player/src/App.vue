@@ -26,7 +26,7 @@ onMounted(() => {
   axios.get(`${baseUrl}/api/v2/Export/ExportSharedDialogue/${asObject.worldId}/${asObject.storyId}/${asObject.dialogueId}/${asObject.code}`)
     .then(r => {
       window.setTimeout(() => {
-        initDialogue(r);
+        initDialogue(r.data);
       }, 500)
     })
 })
