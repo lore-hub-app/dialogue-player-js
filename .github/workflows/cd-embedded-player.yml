@@ -39,7 +39,7 @@ jobs:
         with:
           name: ${{ env.DIST_FOLDER }}
           path: ${{ env.DIST_FOLDER }}
-     - uses: Azure/static-web-apps-deploy@v1
+      - uses: Azure/static-web-apps-deploy@v1
         with:
           skip_app_build: true
           app_location: ${{ env.DIST_FOLDER }}
