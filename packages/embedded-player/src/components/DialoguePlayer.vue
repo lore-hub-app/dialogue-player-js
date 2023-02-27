@@ -116,6 +116,7 @@ function keyboardPress(event: KeyboardEvent) {
     if (dialogue.value.currentNode?.options.length === 0 && number === 1) {
       // press next button
       next(dialogue.value.currentNode as DialogueNode)
+      return;
     }
     const tryToFindOption = dialogue.value.currentNode?.options[number - 1]
     if (tryToFindOption == null) return;
