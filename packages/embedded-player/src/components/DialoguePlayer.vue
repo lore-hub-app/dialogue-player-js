@@ -31,7 +31,7 @@
       <v-row v-if="!dialogue.isFinished" class="justify-center mb-6">
         <div class="dialog-card">
           <div v-for="(item, index) in dialogue.currentNode?.content" :key="index">
-            <span> {{ item.text }}</span>
+            <span :class="{ 'font-weight-bold': isItDocumentReference(item) }"> {{ item.text }}</span>
           </div>
         </div>
       </v-row>
@@ -67,6 +67,7 @@ import {
   Dialogue,
   DialogueNode,
   DialogueNodeOption,
+  DialogueReferenceContent,
   GoToNextNode,
   MetaData,
 } from "@lorehub/dialogue-player"
@@ -96,6 +97,10 @@ function getVariableName(variableId: string) {
 function getMetaDataName(metaData: MetaData) {
   const metaSchema = dialogue.value.metaSchema.find(s => s.id == metaData.metaSchemaId);
   return metaSchema?.name;
+}
+
+function isItDocumentReference(item: any) {
+  return item instanceof DialogueReferenceContent
 }
 
 window.addEventListener('keyup', (event) => keyboardPress(event));
