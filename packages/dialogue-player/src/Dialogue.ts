@@ -17,7 +17,6 @@ export class Dialogue {
     public readonly metaSchema: MetaSchema[]) {
     this.id = new FullId(id);
     this.currentNode = startNode;
-    applyOptionStatus(this.variables, this.currentNode)
   }
 
   get isFinished() {
@@ -37,7 +36,6 @@ export class Dialogue {
     for (const setVariable of node.setVariableOnStart) {
       this.setVariable(setVariable);
     }
-    applyOptionStatus(this.variables, node)
   }
 
   addNode(node: DialogueNode) {
@@ -46,18 +44,6 @@ export class Dialogue {
     }
     else {
       throw new Error("node must be instance of DialogueNode");
-    }
-  }
-}
-
-function applyOptionStatus(variables: BooleanVariable[], node: DialogueNode) {
-  for (const option of node.options) {
-    for (const reqVariable of option.requiredVariables) {
-      const checkVar = variables.find(v => v.id === reqVariable.variableId);
-      if (checkVar == null) throw new Error("Cannot apply options status because variable to check is null");
-      if (reqVariable.value !== checkVar.currentValue) {
-        option.isDisabled = true;
-      }
     }
   }
 }
