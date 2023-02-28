@@ -43,7 +43,8 @@
               <v-icon>mdi-numeric-1-box</v-icon>Next
             </v-btn>
             <v-col cols="12" v-for="(option, index) in dialogue.currentNode.options" :key="option.id.fullValue">
-              <v-btn @click="next(option as DialogueNodeOption)" :dark="option.isDisabled" :disabled="option.isDisabled">
+              <v-btn @click="next(option as DialogueNodeOption)" :dark="isOptionDisabled(option as DialogueNodeOption)"
+                :disabled="isOptionDisabled(option as DialogueNodeOption)">
                 <v-icon>mdi-numeric-{{ index + 1 }}-box</v-icon> {{ option.text }}
               </v-btn>
               <span v-for="requiredVar in option.requiredVariables" class="ml-4" :key="requiredVar.variableId">
@@ -78,6 +79,10 @@ const props = defineProps({
 
 const dialogueFromJson = convertExportDataToDialogue(props.json);
 const dialogue = ref(dialogueFromJson);
+
+function isOptionDisabled(option: DialogueNodeOption) {
+  return option.isDisabled(dialogue.value.variables);
+}
 
 function restartDialogue() {
   const dialogueFromJson = convertExportDataToDialogue(props.json);
@@ -121,7 +126,7 @@ function keyboardPress(event: KeyboardEvent) {
     const tryToFindOption = dialogue.value.currentNode?.options[number - 1]
     if (tryToFindOption == null) return;
     // check if can click
-    if (tryToFindOption.isDisabled) return;
+    if (isOptionDisabled(tryToFindOption as DialogueNodeOption)) return;
     // press option
     next(tryToFindOption as DialogueNodeOption)
   }
