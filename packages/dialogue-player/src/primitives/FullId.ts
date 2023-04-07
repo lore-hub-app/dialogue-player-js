@@ -1,5 +1,8 @@
 export class FullId {
 
+  /**
+   * @param fullValue Full value path
+   */
   constructor(public readonly fullValue: string) {
     if (fullValue == null) throw Error('Cannot create full id if value is null');
   }

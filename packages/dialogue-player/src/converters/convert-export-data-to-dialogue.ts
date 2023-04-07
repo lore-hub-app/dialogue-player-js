@@ -116,7 +116,7 @@ function createNode(node: IDialogueNode, contentBlocks: IContentBlock[], documen
     if (isContentBlockReference(content)) {
       const neededDocument = documents.find(d => d.id === content.documentId);
       if (neededDocument == null) {
-        throw new Error(`Cannot find document for DialogueReferenceContent ${content.documentId}`);
+        throw new Error(`Cannot find document for DialogueReferenceContent ${content.documentId} in node ${nodeFullId.fullValue}`);
       }
       convertedContent.push(new DialogueReferenceContent(contentBlock.id, content.text, content.documentId, neededDocument.name));
     }
