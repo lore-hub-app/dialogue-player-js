@@ -6,6 +6,7 @@
     "embedded-player": "pnpm run --filter embedded-player",
     "example": "pnpm run --filter example",
     "e2e-tests": "pnpm run --filter e2e-tests",
+    "e2e-ci": "pnpm dev & pnpm e2e-tests e2e",
     "lorehub-shared-dialogue-player": "pnpm run --filter lorehub-shared-dialogue-player",
     "dev": "pnpm embedded-player dev & pnpm example dev & pnpm dialogue-player watch"
   },
