@@ -22,7 +22,10 @@ function sendMessage() {
 
 window.addEventListener('message', function (e) {
   const data = e.data;
-  if (data.message == "dialogue-player-warnings") {
+  if (data.message === "dialogue-player-warnings") {
+    console.log(data);
+  }
+  if (data.message === 'dialogue-player-current-node-id') {
     console.log(data);
   }
 });

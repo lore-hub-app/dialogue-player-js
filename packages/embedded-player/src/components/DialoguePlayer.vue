@@ -76,6 +76,7 @@ import {
   MetaData,
 } from "@lorehub/dialogue-player"
 import { postWarnings } from "@/messages/post-warnings";
+import { postCurrentNodeId } from '@/messages/post-current-node-id';
 
 const props = defineProps({
   json: Object
@@ -86,6 +87,7 @@ const dialogueFromJson = result.dialogue;
 postWarnings(result.warnings)
 
 const dialogue = ref(dialogueFromJson);
+dialogue.value.on("currentNodeChange", postCurrentNodeId)
 
 
 function isOptionDisabled(option: DialogueNodeOption) {
