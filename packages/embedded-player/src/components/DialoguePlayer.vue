@@ -29,14 +29,15 @@
     </v-row>
     <template v-if="dialogue">
       <v-row v-if="!dialogue.isFinished" class="justify-center mb-6">
-        <div class="dialog-card">
+        <div class="dialog-card" test-id="node-content">
           <div v-for="(item, index) in dialogue.currentNode?.content" :key="index">
-            <span :class="{ 'font-weight-bold': isItDocumentReference(item) }"> {{ item.text }}</span>
+            <span :test-id="`content-${index}`" :class="{ 'font-weight-bold': isItDocumentReference(item) }"> {{ item.text
+            }}</span>
           </div>
         </div>
       </v-row>
 
-      <v-row class=" justify-center">
+      <v-row class="justify-center">
         <div class="options-section">
           <template v-if="!dialogue.isFinished && dialogue.currentNode">
             <v-btn v-if="dialogue.currentNode.options.length === 0" @click="next(dialogue.currentNode as DialogueNode)">
