@@ -4,12 +4,15 @@ import { DialogueNode } from './nodes/DialogueNode'
 import { FullId } from './primitives/FullId';
 import { BooleanVariable } from './variables/BooleanVariable';
 import { SetVariableOnStart } from './variables/SerVariableOnStart';
+import { IEvent } from './events/IEvent';
+import { EventTypes } from './events/EventTypes';
 
 export class Dialogue {
 
   public nodes: DialogueNode[] = [];
   public currentNode: DialogueNode | null;
   public readonly id: FullId;
+  public callbacks: IEvent[] = [];
   constructor(
     id: string,
     public readonly startNode: DialogueNode,
@@ -17,6 +20,19 @@ export class Dialogue {
     public readonly metaSchema: MetaSchema[]) {
     this.id = new FullId(id);
     this.currentNode = startNode;
+  }
+
+  /**
+   * Allows you to register callbacks for different event type.
+   * If Event is 'currentNodeChange' will fire callback right away to provide with current node id.
+   */
+  on(eventName: EventTypes, callback: (node: DialogueNode | null) => void) {
+    this.callbacks.push({
+      eventName, callback
+    })
+    if (eventName === 'currentNodeChange') {
+      callback(this.currentNode);
+    }
   }
 
   get isFinished() {
@@ -30,6 +46,11 @@ export class Dialogue {
   }
 
   setCurrentNode(node: DialogueNode | null) {
+    this.callbacks
+      .filter(c => c.eventName == 'currentNodeChange')
+      .forEach(c => {
+        c.callback(node);
+      });
     this.currentNode = node;
     if (node == null) return;
     // apply variables on next node start

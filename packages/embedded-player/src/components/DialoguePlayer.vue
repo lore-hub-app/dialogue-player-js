@@ -65,7 +65,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onBeforeUnmount } from 'vue';
+import { ref, onBeforeUnmount, watch } from 'vue';
 import {
   convertExportDataToDialogue,
   Dialogue,
@@ -75,6 +75,8 @@ import {
   GoToNextNode,
   MetaData,
 } from "@lorehub/dialogue-player"
+import { postWarnings } from "@/messages/post-warnings";
+import { postCurrentNodeId } from '@/messages/post-current-node-id';
 
 const props = defineProps({
   json: Object
@@ -82,7 +84,11 @@ const props = defineProps({
 
 const result = convertExportDataToDialogue(props.json);
 const dialogueFromJson = result.dialogue;
+postWarnings(result.warnings)
+
 const dialogue = ref(dialogueFromJson);
+dialogue.value.on("currentNodeChange", postCurrentNodeId)
+
 
 function isOptionDisabled(option: DialogueNodeOption) {
   return option.isDisabled(dialogue.value.variables);
