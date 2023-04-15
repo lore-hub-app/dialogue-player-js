@@ -24,13 +24,13 @@ jobs:
       - run: pnpm install
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
-      - run: pnpm dev && pnpm e2e
       - run: pnpm dialogue-player lint
       - run: pnpm embedded-player lint
       - run: pnpm dialogue-player test
       - run: pnpm embedded-player test
       - run: pnpm dialogue-player build
       - run: pnpm embedded-player build
+      - run: pnpm dev && pnpm e2e
       - uses: actions/upload-artifact@v3
         if: always()
         with:
