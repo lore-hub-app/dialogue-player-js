@@ -47,7 +47,7 @@ jobs:
     name: Deploy to NPM
     needs: [ci]
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && startswith(github.ref, 'refs/tags') && github.repository_owner == 'lore-hub-app'
+    if: startswith(github.ref, 'refs/tags') && github.repository_owner == 'lore-hub-app'
     steps:
       - uses: actions/checkout@v2
       - run: npm ci
