@@ -1,9 +1,9 @@
 <template>
   <div>
     <h1>Hello this example</h1>
-    <button @click="sendMessage">Load dialogue</button>
+    <button @click="sendMessage" test-id="load-dialogue-1">Load dialogue #1</button>
     <div>
-      <iframe ref="player" src=" http://localhost:3000" height="500px" width="100%"></iframe>
+      <iframe ref="player" test-id="frame" src=" http://localhost:3000" height="500px" width="100%"></iframe>
     </div>
   </div>
 </template>
@@ -13,7 +13,6 @@ import jsonDialogue from '../assets/example-dialogue-json.json';
 import { ref } from 'vue';
 
 const player = ref(null);
-
 
 function sendMessage() {
   if (player.value == null) return;

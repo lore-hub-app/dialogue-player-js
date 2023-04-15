@@ -3,4 +3,5 @@ packages:
   - 'packages/embedded-player/'
   - 'packages/example/'
   - 'packages/lorehub-shared-dialogue-player/'
+  - 'packages/e2e-tests'
 
