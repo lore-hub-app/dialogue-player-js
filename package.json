@@ -8,5 +8,5 @@
     "lorehub-shared-dialogue-player": "pnpm run --filter lorehub-shared-dialogue-player",
     "dev": "pnpm embedded-player dev & pnpm example dev & pnpm dialogue-player watch"
   },
-  "packageManager": "pnpm@7.28.0"
+  "packageManager": "pnpm@8.2.0"
 }
