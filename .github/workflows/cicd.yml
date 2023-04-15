@@ -42,7 +42,6 @@ jobs:
           name: dialog-player-js
           path: packages/dialogue-player/dist
           if-no-files-found: error
-            - uses: actions/upload-artifact@v3
 
   deploy:
     name: Deploy to NPM
