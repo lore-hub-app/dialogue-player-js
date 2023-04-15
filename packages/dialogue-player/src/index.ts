@@ -8,3 +8,5 @@ export { GoToNextNode } from './commands/GoToNextNode';
 export { BooleanVariable } from './variables/BooleanVariable';
 export { RequiredVariable } from './variables/RequiredVariable';
 export { MetaData } from './meta-data/MetaData';
+export { IResult } from './converters/result/IResult';
+export { IWarningReferenceNotFound } from './converters/result/IWarningReferenceNotFound';

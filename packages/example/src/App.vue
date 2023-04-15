@@ -20,4 +20,11 @@ function sendMessage() {
   playerDom.contentWindow?.postMessage(JSON.stringify(jsonDialogue), "*");
 }
 
+window.addEventListener('message', function (e) {
+  const data = e.data;
+  if (data.message == "dialogue-player-warnings") {
+    console.log(data);
+  }
+});
+
 </script>
