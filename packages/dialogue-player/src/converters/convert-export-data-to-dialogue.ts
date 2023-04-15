@@ -17,18 +17,23 @@ import { IVariable } from "../schema/IVariable";
 import { IMetaSchema } from "../schema/IMetaSchema";
 import { MetaSchema } from "../meta-data/MetaSchema";
 import { MetaData } from "../meta-data/MetaData";
+import { IResult } from "./result/IResult";
+import { IWarningReferenceNotFound } from "./result/IWarningReferenceNotFound";
 
+
+const warnings: IWarningReferenceNotFound[] = []
 
 /**
  * Will convert data from server to a dialogue.
  * @param {string} data JSON dialogue schema https://lorehub.app/documentation/dialogue-schema-api/export-schema-v2
  */
-export function convertExportDataToDialogue(data: any): Dialogue {
+export function convertExportDataToDialogue(data: any): IResult {
+
 
   // TODO: data should be unknown and add validation to each resource
   const resources = data.resources;
   /** https://lorehub.app/documentation/dialogue-schema-api/dialogue-v2 */
-  const dialogue: IDialogue = resources.find((d: any) => d.type === '@lorehub/dialogue') as IDialogue;
+  const dialogueResource: IDialogue = resources.find((d: any) => d.type === '@lorehub/dialogue') as IDialogue;
   /** https://lorehub.app/documentation/dialogue-schema-api/dialogue-node-v2 */
   const nodes: IDialogueNode[] = resources.filter((r: any) => r.type === "@lorehub/dialogue-node") as IDialogueNode[];
   /* https://lorehub.app/documentation/dialogue-schema-api/content-block-v1 */
@@ -51,7 +56,7 @@ export function convertExportDataToDialogue(data: any): Dialogue {
     nodeOptions
   );
 
-  const linkFromDialogue = links.find((l: ILink) => l.from === dialogue.id);
+  const linkFromDialogue = links.find((l: ILink) => l.from === dialogueResource.id);
   if (linkFromDialogue == null) {
     throw new Error(`Cannot start dialogue because there is no link from dialogue`);
   }
@@ -90,9 +95,9 @@ export function convertExportDataToDialogue(data: any): Dialogue {
 
   const convertedVariables = variables.map(v => new BooleanVariable(v.id, v.name, v.defaultValue))
   const convertedMetaSchema = metaSchema.map(v => new MetaSchema(v.id, v.name, v.schemaType));
-  const dialog = new Dialogue(dialogue.id, startingNode, convertedVariables, convertedMetaSchema);
+  const dialogue = new Dialogue(dialogueResource.id, startingNode, convertedVariables, convertedMetaSchema);
 
-  return dialog;
+  return { dialogue, warnings };
 }
 
 function createDialogueNodes(dialogueNodes: IDialogueNode[], contentBlocks: IContentBlock[], documents: IDocument[], options: IDialogueNodeOption[]): DialogueNode[] {
@@ -116,9 +121,14 @@ function createNode(node: IDialogueNode, contentBlocks: IContentBlock[], documen
     if (isContentBlockReference(content)) {
       const neededDocument = documents.find(d => d.id === content.documentId);
       if (neededDocument == null) {
-        throw new Error(`Cannot find document for DialogueReferenceContent ${content.documentId} in node ${nodeFullId.fullValue}`);
+        const warning: IWarningReferenceNotFound = {
+          message: `Cannot find document for DialogueReferenceContent ${content.documentId} in node ${nodeFullId.fullValue}`,
+          nodeFullId: nodeFullId.fullValue,
+          contentBlockId: contentBlock.id
+        }
+        warnings.push(warning)
       }
-      convertedContent.push(new DialogueReferenceContent(contentBlock.id, content.text, content.documentId, neededDocument.name));
+      convertedContent.push(new DialogueReferenceContent(contentBlock.id, content.text, content.documentId, neededDocument?.name ?? ''));
     }
     else {
       convertedContent.push(new DialogueTextContent(contentBlock.id, content.text));

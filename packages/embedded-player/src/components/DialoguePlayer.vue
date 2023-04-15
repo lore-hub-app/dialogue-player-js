@@ -77,7 +77,8 @@ const props = defineProps({
   json: Object
 })
 
-const dialogueFromJson = convertExportDataToDialogue(props.json);
+const result = convertExportDataToDialogue(props.json);
+const dialogueFromJson = result.dialogue;
 const dialogue = ref(dialogueFromJson);
 
 function isOptionDisabled(option: DialogueNodeOption) {
@@ -85,7 +86,8 @@ function isOptionDisabled(option: DialogueNodeOption) {
 }
 
 function restartDialogue() {
-  const dialogueFromJson = convertExportDataToDialogue(props.json);
+  const result = convertExportDataToDialogue(props.json);
+  const dialogueFromJson = result.dialogue
   dialogue.value = dialogueFromJson;
 }
 
